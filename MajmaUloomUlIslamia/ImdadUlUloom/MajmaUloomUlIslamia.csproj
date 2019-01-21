@@ -73,6 +73,10 @@
       <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -115,6 +119,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataManipulation.cs" />
+    <Compile Include="editReceiptRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editReceiptRecord.Designer.cs">
+      <DependentUpon>editReceiptRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="editStudentPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +158,12 @@
     <Compile Include="StudentFormDate.cs" />
     <Compile Include="StudentGuardianInfo.cs" />
     <Compile Include="StudentKarachiAddress.cs" />
+    <Compile Include="StudentMonthlyFeePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentMonthlyFeePage.Designer.cs">
+      <DependentUpon>StudentMonthlyFeePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="StudentPermanentAddress.cs" />
     <Compile Include="StudentQawaif.cs" />
     <Compile Include="StudentDakhlaAndFormNumber.cs" />
@@ -169,6 +185,9 @@
     <EmbeddedResource Include="DakhlaFormReportCard.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DakhlaFormReportCard.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editReceiptRecord.resx">
+      <DependentUpon>editReceiptRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="editStudentPage.resx">
       <DependentUpon>editStudentPage.cs</DependentUpon>
@@ -192,6 +211,12 @@
     <EmbeddedResource Include="DakhlaFormReport.resx">
       <DependentUpon>DakhlaFormReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StudentMonthlyFeePage.resx">
+      <DependentUpon>StudentMonthlyFeePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

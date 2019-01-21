@@ -115,6 +115,105 @@ namespace MajmaUloomUlIslamia
             return bookNumberId;
         }
 
+        private static int getNextBookSequence()
+        {
+            int bookNumber = Int32.MaxValue;
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string getBookLastSequence = "select max(bookSequence) from ReceiptBook";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getBookLastSequenceCommand = new SqlCommand(getBookLastSequence, sqlConnection);
+                        SqlDataReader reader2 = getBookLastSequenceCommand.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            bookNumber = Convert.ToInt32(reader2[0]) + 1;
+                        }
+                        reader2.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return bookNumber;
+        }
+
+        private static int getTransactionId()
+        {
+            int transactionId = Int32.MaxValue;
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string getTransactionId = "select max(transactionId) from MajmaTransaction";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getTransactionIdCommand = new SqlCommand(getTransactionId, sqlConnection);
+                        SqlDataReader reader2 = getTransactionIdCommand.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            transactionId = Convert.ToInt32(reader2[0]) + 1;
+                        }
+                        reader2.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return transactionId;
+        }
+
+        private static int getStudentFeeId()
+        {
+            int studentFeeId = Int32.MaxValue;
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string getStudentFeeId = "select max(studentFeeId) from StudentFee";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getStudentFeeIdCommand = new SqlCommand(getStudentFeeId, sqlConnection);
+                        SqlDataReader reader2 = getStudentFeeIdCommand.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            studentFeeId = Convert.ToInt32(reader2[0]) + 1;
+                        }
+                        reader2.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return studentFeeId;
+        }
+
         private static int getGuardianInfoId()
         {
             int guardianInfoId = Int32.MaxValue;
@@ -375,6 +474,8 @@ namespace MajmaUloomUlIslamia
 
                     sqlTransaction.Commit();
 
+                    sqlConnection.Close();
+
                     MessageBox.Show("Data updated");
 
 
@@ -401,7 +502,7 @@ namespace MajmaUloomUlIslamia
                                     AND(sd.dakhlaNumber = dr.dakhlaNumber AND dr.activeInd = 1)
                                     AND sd.dakhlaNumber = sk.dakhlaNumber
                                     AND sd.dakhlaNumber = sp.dakhlaNumber AND sd.dakhlaNumber = sq.dakhlaNumber
-                                    AND sd.dakhlaNumber = srh.dakhlaNumber);");
+                                    AND sd.dakhlaNumber = srh.dakhlaNumber) ORDER BY sd.dakhlaNumber;");
             }
             else
             {
@@ -412,7 +513,7 @@ namespace MajmaUloomUlIslamia
                                     AND(sd.dakhlaNumber = dr.dakhlaNumber AND dr.activeInd = 1)
                                     AND sd.dakhlaNumber = sk.dakhlaNumber
                                     AND sd.dakhlaNumber = sp.dakhlaNumber AND sd.dakhlaNumber = sq.dakhlaNumber
-                                    AND sd.dakhlaNumber = srh.dakhlaNumber);");
+                                    AND sd.dakhlaNumber = srh.dakhlaNumber) ORDER BY sd.dakhlaNumber;");
             }
             List<Student> studentList = new List<Student>();
             using (sqlConnection = new SqlConnection(connectionString))
@@ -670,29 +771,41 @@ namespace MajmaUloomUlIslamia
             try
             {
                 int receiptBookId = getBookNumberId();
-                using (sqlConnection = new SqlConnection(connectionString))
+                int bookSequence = getNextBookSequence();
+                int lastSlipOfPreviousBook = getLastSlipOfBookUsingBookSequence(bookSequence - 1);
+                if((firstSlip-lastSlipOfPreviousBook) == 1)
                 {
-                    string queryBookNumberRecord = "insert into ReceiptBook(receiptBookId, bookNumber, firstSlip, lastSlip, lastUsedSlip, activeInd) values(@receiptBookId, @bookNumber, @firstSlip, @lastSlip, @lastUsedSlip, @activeInd)";
-                    int lastUsedSlip = firstSlip - 1;
-                    try
+                    using (sqlConnection = new SqlConnection(connectionString))
                     {
-                        sqlConnection.Open();
-                        SqlCommand insertBookRecord = new SqlCommand(queryBookNumberRecord, sqlConnection);
-                        insertBookRecord.Parameters.AddWithValue("@receiptBookId", receiptBookId);
-                        insertBookRecord.Parameters.AddWithValue("@bookNumber", bookNumber);
-                        insertBookRecord.Parameters.AddWithValue("@firstSlip", firstSlip);
-                        insertBookRecord.Parameters.AddWithValue("@lastSlip", lastSlip);
-                        insertBookRecord.Parameters.AddWithValue("@lastUsedSlip", lastUsedSlip);
-                        insertBookRecord.Parameters.AddWithValue("@activeInd", 0);
-                        insertBookRecord.ExecuteNonQuery();
+                        string queryBookNumberRecord = "insert into ReceiptBook(receiptBookId, bookNumber, firstSlip, lastSlip, lastUsedSlip, activeInd, isDone, bookSequence) values(@receiptBookId, @bookNumber, @firstSlip, @lastSlip, @lastUsedSlip, @activeInd, @isDone, @bookSequence)";
+                        int lastUsedSlip = firstSlip - 1;
+                        try
+                        {
+                            sqlConnection.Open();
+                            SqlCommand insertBookRecord = new SqlCommand(queryBookNumberRecord, sqlConnection);
+                            insertBookRecord.Parameters.AddWithValue("@receiptBookId", receiptBookId);
+                            insertBookRecord.Parameters.AddWithValue("@bookNumber", bookNumber);
+                            insertBookRecord.Parameters.AddWithValue("@firstSlip", firstSlip);
+                            insertBookRecord.Parameters.AddWithValue("@lastSlip", lastSlip);
+                            insertBookRecord.Parameters.AddWithValue("@lastUsedSlip", lastUsedSlip);
+                            insertBookRecord.Parameters.AddWithValue("@activeInd", 0);
+                            insertBookRecord.Parameters.AddWithValue("@isDone", 0);
+                            insertBookRecord.Parameters.AddWithValue("@bookSequence", bookSequence);
+                            insertBookRecord.ExecuteNonQuery();
 
-                        MessageBox.Show("Receipt Book inserted");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Receipt Book failed to insert");
+                            MessageBox.Show("Receipt Book inserted");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Receipt Book failed to insert");
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Sequence didnot match. Insertion failed.");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -707,7 +820,7 @@ namespace MajmaUloomUlIslamia
             {
                 using (sqlConnection = new SqlConnection(connectionString))
                 {
-                    string queryGetAllBookNumber = "select bookNumber from ReceiptBook where bookNumber <> 0";
+                    string queryGetAllBookNumber = "select bookNumber from ReceiptBook where bookNumber <> 0 ORDER BY bookSequence";
                     try
                     {
                         sqlConnection.Open();
@@ -768,7 +881,7 @@ namespace MajmaUloomUlIslamia
             return activeReceiptBookInfo;
         }
 
-        public static List<string> getSpecificBookInfo(int bookNumber)
+        public static List<string> getSpecificBookInfoUsingBookNumber(int bookNumber)
         {
             List<string> getBookInfo = new List<string>();
             try
@@ -803,6 +916,142 @@ namespace MajmaUloomUlIslamia
             return getBookInfo;
         }
 
+        public static List<string> getOtherTypeReceiptRecord(string slipNumber)
+        {
+            List<string> otherTypeRecord = new List<string>();
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string queryGetOtherTypeReceiptInfo = "select transactionAmount, transactionYear from MajmaTransaction where slipNumber = @slipNumber";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getOtherTypeInfoCommand = new SqlCommand(queryGetOtherTypeReceiptInfo, sqlConnection);
+                        getOtherTypeInfoCommand.Parameters.AddWithValue("@slipNumber", slipNumber);
+                        SqlDataReader reader = getOtherTypeInfoCommand.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            otherTypeRecord.Add(reader[0].ToString());
+                            otherTypeRecord.Add(reader[1].ToString());
+
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return otherTypeRecord;
+        }
+
+        public static List<List<string>> getStudentTypeReceiptRecord(string slipNumber)
+        {
+            List<List<string>> studentTypeRecords = new List<List<string>>();
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string queryGetStudentTypeReceiptInfo = "select studentFeeType, studentFeeYear, studentFeeMonth, studentFee from StudentFee where slipNumber = @slipNumber";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getStudentTypeInfoCommand = new SqlCommand(queryGetStudentTypeReceiptInfo, sqlConnection);
+                        getStudentTypeInfoCommand.Parameters.AddWithValue("@slipNumber", slipNumber);
+                        SqlDataReader reader = getStudentTypeInfoCommand.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            List<string> studentTypeRecord = new List<string>();
+                            studentTypeRecord.Add(reader[0].ToString());
+                            studentTypeRecord.Add(reader[1].ToString());
+                            studentTypeRecord.Add(reader[2].ToString());
+                            studentTypeRecord.Add(reader[3].ToString());
+                            
+                            studentTypeRecords.Add(studentTypeRecord);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return studentTypeRecords;
+        }
+
+        public static void updateOtherTypeReceiptRecord(double transactionAmount, string transactionYear, string slipNumber)
+        {
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string updateOtherTypeRecord = "Update MajmaTransaction SET transactionAmount = @transactionAmount, transactionYear = @transactionYear WHERE slipNumber = @slipNumber";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand updateOtherTypeRecordCommand = new SqlCommand(updateOtherTypeRecord, sqlConnection);
+                        updateOtherTypeRecordCommand.Parameters.AddWithValue("@slipNumber", slipNumber);
+                        updateOtherTypeRecordCommand.Parameters.AddWithValue("@transactionAmount", transactionAmount);
+                        updateOtherTypeRecordCommand.Parameters.AddWithValue("@transactionYear", transactionYear);
+                        updateOtherTypeRecordCommand.ExecuteNonQuery();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public static int getLastSlipOfBookUsingBookSequence(int bookSequence)
+        {
+            int lastSlip = Int32.MaxValue;
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string queryGetLastSlip = "select lastSlip from ReceiptBook where bookSequence = @bookSequence";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getGetLastSlipCommand = new SqlCommand(queryGetLastSlip, sqlConnection);
+                        getGetLastSlipCommand.Parameters.AddWithValue("@bookSequence", bookSequence);
+                        SqlDataReader reader = getGetLastSlipCommand.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            lastSlip = Convert.ToInt32(reader[0]);
+                        }
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return lastSlip;
+        }
+
         public static void updateBook(int bookNumber, int firstSlip, int lastSlip)
         {
             try
@@ -833,6 +1082,279 @@ namespace MajmaUloomUlIslamia
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        public static int getReceiptNumber()
+        {
+            int receiptNumber = Int32.MaxValue;
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string queryGetReceiptNumber = "select lastUsedSlip+1 from ReceiptBook where activeInd = 1";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getReceiptNumberCommand = new SqlCommand(queryGetReceiptNumber, sqlConnection);
+                        SqlDataReader reader2 = getReceiptNumberCommand.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            receiptNumber = Convert.ToInt32(reader2[0]);
+                        }
+                        reader2.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return receiptNumber;
+        }
+
+        public static List<List<string>> getFeeRecord(int dakhlaNumber)
+        {
+            List<List<string>> feeRecords = new List<List<string>>();
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    string queryGetFeeRecord = "select slipNumber, studentFeeDate, studentFeeMonth, studentFee, studentFeeYear, studentFeeType from StudentFee where dakhlaNumber = @dakhlaNumber";
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getFeeRecordCommand = new SqlCommand(queryGetFeeRecord, sqlConnection);
+                        getFeeRecordCommand.Parameters.AddWithValue("@dakhlaNumber", dakhlaNumber);
+                        SqlDataReader reader2 = getFeeRecordCommand.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            List<string> feeRecord = new List<string>();
+                            feeRecord.Add(reader2[0].ToString());
+                            feeRecord.Add(reader2[1].ToString());
+                            feeRecord.Add(reader2[2].ToString());
+                            feeRecord.Add(reader2[3].ToString());
+                            feeRecord.Add(reader2[4].ToString());
+                            feeRecord.Add(reader2[5].ToString());
+
+                            feeRecords.Add(feeRecord);
+                        }
+                        reader2.Close();
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return feeRecords;
+        }
+
+        public static void doTransaction(string transactionYear, 
+            double transactionAmount, 
+            string slipNumber, 
+            string transactionType, 
+            string transactionDate)
+        {
+            int transactionId = getTransactionId();
+            string queryTransaction = "insert into MajmaTransaction(transactionId, slipNumber, transactionType, transactionDate, transactionAmount, transactionYear) values(@transactionId, @slipNumber, @transactionType, @transactionDate, @transactionAmount, @transactionYear)";
+            string queryUpdateSlip = "update ReceiptBook set lastUsedSlip = lastUsedSlip+1 where activeInd = 1";
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        sqlConnection.Open();
+
+                        sqlTransaction = sqlConnection.BeginTransaction();
+
+                        SqlCommand insertTransaction = new SqlCommand(queryTransaction, sqlConnection, sqlTransaction);
+                        insertTransaction.Parameters.AddWithValue("@transactionId", transactionId);
+                        insertTransaction.Parameters.AddWithValue("@slipNumber", slipNumber);
+                        insertTransaction.Parameters.AddWithValue("@transactionType", transactionType);
+                        insertTransaction.Parameters.AddWithValue("@transactionDate", transactionDate);
+                        insertTransaction.Parameters.AddWithValue("@transactionAmount", transactionAmount);
+                        insertTransaction.Parameters.AddWithValue("@transactionYear", transactionYear);
+                        insertTransaction.ExecuteNonQuery();
+
+                        SqlCommand updateReceipt = new SqlCommand(queryUpdateSlip, sqlConnection, sqlTransaction);
+                        updateReceipt.ExecuteNonQuery();
+
+                        sqlTransaction.Commit();
+
+                        sqlConnection.Close();
+
+                        MessageBox.Show("Transaction done");
+                    }
+                    catch (Exception ex)
+                    {
+                        sqlTransaction.Rollback();
+                        MessageBox.Show("Transaction failed");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        //public static void updateReceipt()
+        //{
+        //    string queryUpdateSlip = "update ReceiptBook set lastUsedSlip = lastUsedSlip+1 where activeInd = 1";
+        //    try
+        //    {
+        //        using (sqlConnection = new SqlConnection(connectionString))
+        //        {
+        //            try
+        //            {
+        //                sqlConnection.Open();
+        //                SqlCommand updateReceiptCommand = new SqlCommand(queryUpdateSlip, sqlConnection);
+        //                updateReceiptCommand.ExecuteNonQuery();
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show(ex.ToString());
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //}
+
+        public static Boolean submitMonthlyfee(string studentFeeMonth, 
+            double monthlyFee,
+            string studentFeeYear,
+            string slipNumber,
+            string studentFeeType,
+            string studentFeeDate,
+            int dakhlaNumber)
+        {
+            Boolean status = false;
+            int studentFeeId = getStudentFeeId();
+            int transactionId = getTransactionId();
+            string queryStudentFeeId = "insert into StudentFee(studentFeeId, studentFeeType, studentFeeYear, studentFeeMonth, dakhlaNumber, studentFeeDate, slipNumber, studentFee) values(@studentFeeId, @studentFeeType, @studentFeeYear, @studentFeeMonth, @dakhlaNumber, @studentFeeDate, @slipNumber, @studentFee)";
+            //string queryTransaction = "insert into MajmaTransaction(transactionId, slipNumber, transactionType, transactionDate, transactionAmount, transactionYear) values(@transactionId, @slipNumber, @transactionType, @transactionDate, @transactionAmount, @transactionYear)";
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        sqlConnection.Open();
+
+                        //sqlTransaction = sqlConnection.BeginTransaction();
+
+                        SqlCommand insertStudentFee = new SqlCommand(queryStudentFeeId, sqlConnection);
+                        insertStudentFee.Parameters.AddWithValue("@studentFeeId", studentFeeId);
+                        insertStudentFee.Parameters.AddWithValue("@studentFeeType", studentFeeType);
+                        insertStudentFee.Parameters.AddWithValue("@studentFeeYear", studentFeeYear);
+                        insertStudentFee.Parameters.AddWithValue("@studentFeeMonth", studentFeeMonth);
+                        insertStudentFee.Parameters.AddWithValue("@dakhlaNumber", dakhlaNumber);
+                        insertStudentFee.Parameters.AddWithValue("@studentFeeDate", studentFeeDate);
+                        insertStudentFee.Parameters.AddWithValue("@slipNumber", slipNumber);
+                        insertStudentFee.Parameters.AddWithValue("@studentFee", monthlyFee);
+
+                        insertStudentFee.ExecuteNonQuery();
+
+                        //SqlCommand insertTransaction = new SqlCommand(queryTransaction, sqlConnection, sqlTransaction);
+                        //insertTransaction.Parameters.AddWithValue("@transactionId", transactionId);
+                        //insertTransaction.Parameters.AddWithValue("@slipNumber", slipNumber);
+                        //insertTransaction.Parameters.AddWithValue("@transactionType", studentFeeType);
+                        //insertTransaction.Parameters.AddWithValue("@transactionDate", studentFeeDate);
+                        //insertTransaction.Parameters.AddWithValue("@transactionAmount", monthlyFee);
+                        //insertTransaction.Parameters.AddWithValue("@transactionYear", studentFeeYear);
+                        //insertTransaction.ExecuteNonQuery();
+
+                        //sqlTransaction.Commit();
+
+                        sqlConnection.Close();
+
+                        status = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        status = false;
+                        //sqlTransaction.Rollback();
+                        MessageBox.Show(ex.ToString());
+                        //MessageBox.Show("Transaction failed");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+                MessageBox.Show(ex.ToString());
+            }
+            return status;
+        }
+
+        public static List<List<string>> getBookRecords(int bookNumber)
+        {
+            List<List<string>> bookRecords = new List<List<string>>();
+            try
+            {
+                using (sqlConnection = new SqlConnection(connectionString))
+                {
+                    StringBuilder queryGetBookRecord = new StringBuilder("SELECT distinct mt.* , sf.dakhlaNumber, " +
+                        "STUFF((SELECT distinct ',' + sf1.[StudentFeeType] FROM StudentFee sf1 where sf.slipNumber = sf1.slipNumber " +
+                        "FOR XML PATH(''), TYPE).value ('.', 'NVARCHAR(MAX)'), 1, 1,'') feeType, " +
+                        "STUFF((SELECT distinct ',' + sf2.[studentFeeMonth] FROM StudentFee sf2 where sf.slipNumber = sf2.slipNumber " +
+                        "FOR XML PATH(''), TYPE).value ('.', 'NVARCHAR(MAX)'), 1, 1,'') feeMonth " +
+                        "FROM MajmaTransaction mt LEFT JOIN StudentFee sf " +
+                        "ON mt.slipNumber = sf.slipNumber " +
+                        "WHERE mt.slipNumber between " +
+                        "( SELECT firstSlip from ReceiptBook WHERE bookNumber = @bookNumber) " +
+                        "AND ( SELECT lastSlip from ReceiptBook WHERE bookNumber = @bookNumber) "
+                        );
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlCommand getFeeBookCommand = new SqlCommand(queryGetBookRecord.ToString(), sqlConnection);
+                        getFeeBookCommand.Parameters.AddWithValue("@bookNumber", bookNumber);
+                        SqlDataReader reader2 = getFeeBookCommand.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            List<string> BookRecord = new List<string>();
+                            BookRecord.Add(reader2[1].ToString());
+                            BookRecord.Add(reader2[2].ToString());
+                            BookRecord.Add(reader2[3].ToString());
+                            BookRecord.Add(reader2[4].ToString());
+                            BookRecord.Add(reader2[5].ToString());
+                            BookRecord.Add(reader2[6].ToString());
+                            BookRecord.Add(reader2[7].ToString());
+                            BookRecord.Add(reader2[8].ToString());
+
+                            bookRecords.Add(BookRecord);
+                        }
+                        reader2.Close();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            return bookRecords;
         }
 
         //public static List<String> getDakhlaNumbers(string regNumber)

@@ -237,7 +237,30 @@
             this.feeEntryTab = new System.Windows.Forms.TabPage();
             this.searchBtnFeeEntryTab = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.newStudentCheckbox = new System.Windows.Forms.CheckBox();
+            this.feeInfoGridView = new System.Windows.Forms.DataGridView();
+            this.slipNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.month = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.year = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.feeType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.otherFeeCheckBox = new System.Windows.Forms.CheckBox();
+            this.newStudentCheckBox = new System.Windows.Forms.CheckBox();
+            this.monthlyFeePanel = new System.Windows.Forms.Panel();
+            this.monthlyFeeTextbox = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.yearPanel = new System.Windows.Forms.Panel();
+            this.amountYearTextbox = new System.Windows.Forms.TextBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.receiptNumberText = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
+            this.submitFeeButton = new System.Windows.Forms.Button();
+            this.otherFeePanel = new System.Windows.Forms.Panel();
+            this.otherFeeAmountTextbox = new System.Windows.Forms.TextBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
             this.newStudentPanel = new System.Windows.Forms.Panel();
             this.label57 = new System.Windows.Forms.Label();
             this.courseFeeTextbox = new System.Windows.Forms.TextBox();
@@ -245,9 +268,6 @@
             this.label55 = new System.Windows.Forms.Label();
             this.adminssionFeeTextBox = new System.Windows.Forms.TextBox();
             this.label56 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.monthlyFeeTextbox = new System.Windows.Forms.TextBox();
-            this.label54 = new System.Windows.Forms.Label();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.monthDec = new System.Windows.Forms.CheckBox();
             this.monthFab = new System.Windows.Forms.CheckBox();
@@ -261,7 +281,9 @@
             this.monthAug = new System.Windows.Forms.CheckBox();
             this.monthMay = new System.Windows.Forms.CheckBox();
             this.monthJan = new System.Windows.Forms.CheckBox();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.studentInfoFeeTabPanel = new System.Windows.Forms.GroupBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.dakhlaNumberTBFeeEntryTab = new System.Windows.Forms.TextBox();
             this.classSchoolTextboxFeeEntryTab = new System.Windows.Forms.TextBox();
             this.classQuraniaTextboxFeeEntryTab = new System.Windows.Forms.TextBox();
             this.imageStudentFeeEntryTab = new System.Windows.Forms.PictureBox();
@@ -276,16 +298,21 @@
             this.label53 = new System.Windows.Forms.Label();
             this.dakhlaNumberTextboxFeeEntryTab = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
+            this.receiptBookInfoTab = new System.Windows.Forms.TabPage();
+            this.updateBookRecord = new System.Windows.Forms.Button();
+            this.searchBookRecords = new System.Windows.Forms.Button();
+            this.bookRecordsGridView = new System.Windows.Forms.DataGridView();
+            this.slipNumberRB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionTypeRB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionDateRB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionAmountRB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transactionYearRB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dakhlaNumberRB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.feeTypeRB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.feeMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bookNumberInfoCombobox = new System.Windows.Forms.ComboBox();
+            this.label71 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label61 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label62 = new System.Windows.Forms.Label();
-            this.otherFeePanel = new System.Windows.Forms.Panel();
-            this.otherFeeChkbox = new System.Windows.Forms.CheckBox();
-            this.label67 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label68 = new System.Windows.Forms.Label();
-            this.submitFee = new System.Windows.Forms.Button();
             this.addNewStudentTab.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -317,12 +344,17 @@
             this.groupBox5.SuspendLayout();
             this.feeEntryTab.SuspendLayout();
             this.groupBox13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.feeInfoGridView)).BeginInit();
+            this.monthlyFeePanel.SuspendLayout();
+            this.yearPanel.SuspendLayout();
+            this.otherFeePanel.SuspendLayout();
             this.newStudentPanel.SuspendLayout();
             this.groupBox12.SuspendLayout();
-            this.groupBox11.SuspendLayout();
+            this.studentInfoFeeTabPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageStudentFeeEntryTab)).BeginInit();
+            this.receiptBookInfoTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bookRecordsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.otherFeePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // addNewStudentTab
@@ -1376,6 +1408,7 @@
             this.mainTab.Controls.Add(this.tabPage2);
             this.mainTab.Controls.Add(this.ReceiptBook);
             this.mainTab.Controls.Add(this.feeEntryTab);
+            this.mainTab.Controls.Add(this.receiptBookInfoTab);
             this.mainTab.Font = new System.Drawing.Font("Alvi Nastaleeq", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainTab.Location = new System.Drawing.Point(-2, 0);
             this.mainTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -2846,7 +2879,7 @@
             this.feeEntryTab.Controls.Add(this.searchBtnFeeEntryTab);
             this.feeEntryTab.Controls.Add(this.groupBox13);
             this.feeEntryTab.Controls.Add(this.groupBox12);
-            this.feeEntryTab.Controls.Add(this.groupBox11);
+            this.feeEntryTab.Controls.Add(this.studentInfoFeeTabPanel);
             this.feeEntryTab.Controls.Add(this.dakhlaNumberTextboxFeeEntryTab);
             this.feeEntryTab.Controls.Add(this.label46);
             this.feeEntryTab.Location = new System.Drawing.Point(4, 34);
@@ -2871,34 +2904,252 @@
             // 
             // groupBox13
             // 
-            this.groupBox13.Controls.Add(this.submitFee);
-            this.groupBox13.Controls.Add(this.label67);
-            this.groupBox13.Controls.Add(this.textBox2);
-            this.groupBox13.Controls.Add(this.label68);
-            this.groupBox13.Controls.Add(this.otherFeeChkbox);
+            this.groupBox13.Controls.Add(this.feeInfoGridView);
+            this.groupBox13.Controls.Add(this.otherFeeCheckBox);
+            this.groupBox13.Controls.Add(this.newStudentCheckBox);
+            this.groupBox13.Controls.Add(this.monthlyFeePanel);
+            this.groupBox13.Controls.Add(this.yearPanel);
+            this.groupBox13.Controls.Add(this.receiptNumberText);
+            this.groupBox13.Controls.Add(this.label70);
+            this.groupBox13.Controls.Add(this.submitFeeButton);
             this.groupBox13.Controls.Add(this.otherFeePanel);
-            this.groupBox13.Controls.Add(this.newStudentCheckbox);
             this.groupBox13.Controls.Add(this.newStudentPanel);
-            this.groupBox13.Controls.Add(this.label50);
-            this.groupBox13.Controls.Add(this.monthlyFeeTextbox);
-            this.groupBox13.Controls.Add(this.label54);
-            this.groupBox13.Location = new System.Drawing.Point(167, 250);
+            this.groupBox13.Location = new System.Drawing.Point(167, 231);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(793, 401);
+            this.groupBox13.Size = new System.Drawing.Size(793, 417);
             this.groupBox13.TabIndex = 64;
             this.groupBox13.TabStop = false;
             // 
-            // newStudentCheckbox
+            // feeInfoGridView
             // 
-            this.newStudentCheckbox.AutoSize = true;
-            this.newStudentCheckbox.Location = new System.Drawing.Point(696, 32);
-            this.newStudentCheckbox.Name = "newStudentCheckbox";
-            this.newStudentCheckbox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.newStudentCheckbox.Size = new System.Drawing.Size(61, 29);
-            this.newStudentCheckbox.TabIndex = 12;
-            this.newStudentCheckbox.Text = "نیا داخلہ";
-            this.newStudentCheckbox.UseVisualStyleBackColor = true;
-            this.newStudentCheckbox.CheckedChanged += new System.EventHandler(this.newStudentCheckbox_CheckedChanged);
+            this.feeInfoGridView.AllowUserToAddRows = false;
+            this.feeInfoGridView.AllowUserToDeleteRows = false;
+            this.feeInfoGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.feeInfoGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.feeInfoGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.slipNumber,
+            this.date,
+            this.month,
+            this.amount,
+            this.year,
+            this.feeType});
+            this.feeInfoGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.feeInfoGridView.Location = new System.Drawing.Point(6, 32);
+            this.feeInfoGridView.Name = "feeInfoGridView";
+            this.feeInfoGridView.ReadOnly = true;
+            this.feeInfoGridView.Size = new System.Drawing.Size(469, 364);
+            this.feeInfoGridView.TabIndex = 73;
+            // 
+            // slipNumber
+            // 
+            this.slipNumber.HeaderText = "رسید نمبر";
+            this.slipNumber.Name = "slipNumber";
+            this.slipNumber.ReadOnly = true;
+            this.slipNumber.Width = 50;
+            // 
+            // date
+            // 
+            this.date.HeaderText = "تاریخ";
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            this.date.Width = 80;
+            // 
+            // month
+            // 
+            this.month.HeaderText = "مہینہ";
+            this.month.Name = "month";
+            this.month.ReadOnly = true;
+            this.month.Width = 90;
+            // 
+            // amount
+            // 
+            this.amount.HeaderText = "رقم";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            this.amount.Width = 50;
+            // 
+            // year
+            // 
+            this.year.HeaderText = "سال";
+            this.year.Name = "year";
+            this.year.ReadOnly = true;
+            this.year.Width = 50;
+            // 
+            // feeType
+            // 
+            this.feeType.HeaderText = "قسم";
+            this.feeType.Name = "feeType";
+            this.feeType.ReadOnly = true;
+            this.feeType.Width = 90;
+            // 
+            // otherFeeCheckBox
+            // 
+            this.otherFeeCheckBox.AutoSize = true;
+            this.otherFeeCheckBox.Location = new System.Drawing.Point(601, 57);
+            this.otherFeeCheckBox.Name = "otherFeeCheckBox";
+            this.otherFeeCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.otherFeeCheckBox.Size = new System.Drawing.Size(47, 29);
+            this.otherFeeCheckBox.TabIndex = 72;
+            this.otherFeeCheckBox.Text = "دیگر";
+            this.otherFeeCheckBox.UseVisualStyleBackColor = true;
+            this.otherFeeCheckBox.CheckedChanged += new System.EventHandler(this.otherFeeCheckBox_CheckedChanged);
+            // 
+            // newStudentCheckBox
+            // 
+            this.newStudentCheckBox.AutoSize = true;
+            this.newStudentCheckBox.Location = new System.Drawing.Point(695, 57);
+            this.newStudentCheckBox.Name = "newStudentCheckBox";
+            this.newStudentCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.newStudentCheckBox.Size = new System.Drawing.Size(61, 29);
+            this.newStudentCheckBox.TabIndex = 71;
+            this.newStudentCheckBox.Text = "نیا داخلہ";
+            this.newStudentCheckBox.UseVisualStyleBackColor = true;
+            this.newStudentCheckBox.CheckedChanged += new System.EventHandler(this.newStudentCheckBox_CheckedChanged);
+            // 
+            // monthlyFeePanel
+            // 
+            this.monthlyFeePanel.Controls.Add(this.monthlyFeeTextbox);
+            this.monthlyFeePanel.Controls.Add(this.label54);
+            this.monthlyFeePanel.Controls.Add(this.label50);
+            this.monthlyFeePanel.Location = new System.Drawing.Point(505, 206);
+            this.monthlyFeePanel.Name = "monthlyFeePanel";
+            this.monthlyFeePanel.Size = new System.Drawing.Size(268, 44);
+            this.monthlyFeePanel.TabIndex = 47;
+            // 
+            // monthlyFeeTextbox
+            // 
+            this.monthlyFeeTextbox.Location = new System.Drawing.Point(55, 8);
+            this.monthlyFeeTextbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.monthlyFeeTextbox.Name = "monthlyFeeTextbox";
+            this.monthlyFeeTextbox.Size = new System.Drawing.Size(131, 33);
+            this.monthlyFeeTextbox.TabIndex = 35;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(207, 6);
+            this.label54.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(0, 25);
+            this.label54.TabIndex = 36;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(203, 11);
+            this.label50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(50, 25);
+            this.label50.TabIndex = 37;
+            this.label50.Text = "ماہانہ فیس";
+            // 
+            // yearPanel
+            // 
+            this.yearPanel.Controls.Add(this.amountYearTextbox);
+            this.yearPanel.Controls.Add(this.label68);
+            this.yearPanel.Controls.Add(this.label67);
+            this.yearPanel.Location = new System.Drawing.Point(506, 256);
+            this.yearPanel.Name = "yearPanel";
+            this.yearPanel.Size = new System.Drawing.Size(268, 44);
+            this.yearPanel.TabIndex = 43;
+            // 
+            // amountYearTextbox
+            // 
+            this.amountYearTextbox.Location = new System.Drawing.Point(55, 6);
+            this.amountYearTextbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.amountYearTextbox.Name = "amountYearTextbox";
+            this.amountYearTextbox.Size = new System.Drawing.Size(131, 33);
+            this.amountYearTextbox.TabIndex = 44;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(202, 6);
+            this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(0, 25);
+            this.label68.TabIndex = 45;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(212, 9);
+            this.label67.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(30, 25);
+            this.label67.TabIndex = 46;
+            this.label67.Text = "سال";
+            // 
+            // receiptNumberText
+            // 
+            this.receiptNumberText.AutoSize = true;
+            this.receiptNumberText.Location = new System.Drawing.Point(637, 22);
+            this.receiptNumberText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.receiptNumberText.Name = "receiptNumberText";
+            this.receiptNumberText.Size = new System.Drawing.Size(44, 25);
+            this.receiptNumberText.TabIndex = 68;
+            this.receiptNumberText.Text = "0000";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(700, 22);
+            this.label70.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(48, 25);
+            this.label70.TabIndex = 67;
+            this.label70.Text = "رسید نمبر";
+            // 
+            // submitFeeButton
+            // 
+            this.submitFeeButton.BackColor = System.Drawing.Color.Navy;
+            this.submitFeeButton.Font = new System.Drawing.Font("Alvi Nastaleeq", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.submitFeeButton.ForeColor = System.Drawing.Color.White;
+            this.submitFeeButton.Location = new System.Drawing.Point(582, 365);
+            this.submitFeeButton.Name = "submitFeeButton";
+            this.submitFeeButton.Size = new System.Drawing.Size(94, 43);
+            this.submitFeeButton.TabIndex = 66;
+            this.submitFeeButton.Text = "جمع کریں";
+            this.submitFeeButton.UseVisualStyleBackColor = false;
+            this.submitFeeButton.Click += new System.EventHandler(this.submitFeeButton_Click);
+            // 
+            // otherFeePanel
+            // 
+            this.otherFeePanel.Controls.Add(this.otherFeeAmountTextbox);
+            this.otherFeePanel.Controls.Add(this.label61);
+            this.otherFeePanel.Controls.Add(this.label62);
+            this.otherFeePanel.Location = new System.Drawing.Point(505, 308);
+            this.otherFeePanel.Name = "otherFeePanel";
+            this.otherFeePanel.Size = new System.Drawing.Size(268, 38);
+            this.otherFeePanel.TabIndex = 42;
+            this.otherFeePanel.Visible = false;
+            // 
+            // otherFeeAmountTextbox
+            // 
+            this.otherFeeAmountTextbox.Location = new System.Drawing.Point(55, 2);
+            this.otherFeeAmountTextbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.otherFeeAmountTextbox.Name = "otherFeeAmountTextbox";
+            this.otherFeeAmountTextbox.Size = new System.Drawing.Size(131, 33);
+            this.otherFeeAmountTextbox.TabIndex = 39;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(217, 5);
+            this.label61.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(26, 25);
+            this.label61.TabIndex = 41;
+            this.label61.Text = "رقم";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(212, 5);
+            this.label62.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(0, 25);
+            this.label62.TabIndex = 40;
             // 
             // newStudentPanel
             // 
@@ -2908,16 +3159,16 @@
             this.newStudentPanel.Controls.Add(this.label55);
             this.newStudentPanel.Controls.Add(this.adminssionFeeTextBox);
             this.newStudentPanel.Controls.Add(this.label56);
-            this.newStudentPanel.Location = new System.Drawing.Point(504, 212);
+            this.newStudentPanel.Location = new System.Drawing.Point(505, 92);
             this.newStudentPanel.Name = "newStudentPanel";
-            this.newStudentPanel.Size = new System.Drawing.Size(268, 112);
+            this.newStudentPanel.Size = new System.Drawing.Size(268, 110);
             this.newStudentPanel.TabIndex = 38;
             this.newStudentPanel.Visible = false;
             // 
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(200, 69);
+            this.label57.Location = new System.Drawing.Point(200, 76);
             this.label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(57, 25);
@@ -2926,7 +3177,7 @@
             // 
             // courseFeeTextbox
             // 
-            this.courseFeeTextbox.Location = new System.Drawing.Point(55, 66);
+            this.courseFeeTextbox.Location = new System.Drawing.Point(55, 73);
             this.courseFeeTextbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.courseFeeTextbox.Name = "courseFeeTextbox";
             this.courseFeeTextbox.Size = new System.Drawing.Size(131, 33);
@@ -2935,7 +3186,7 @@
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(212, 69);
+            this.label60.Location = new System.Drawing.Point(212, 76);
             this.label60.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(0, 25);
@@ -2944,7 +3195,7 @@
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(200, 14);
+            this.label55.Location = new System.Drawing.Point(200, 30);
             this.label55.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(52, 25);
@@ -2953,7 +3204,7 @@
             // 
             // adminssionFeeTextBox
             // 
-            this.adminssionFeeTextBox.Location = new System.Drawing.Point(55, 11);
+            this.adminssionFeeTextBox.Location = new System.Drawing.Point(55, 27);
             this.adminssionFeeTextBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.adminssionFeeTextBox.Name = "adminssionFeeTextBox";
             this.adminssionFeeTextBox.Size = new System.Drawing.Size(131, 33);
@@ -2962,38 +3213,11 @@
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(212, 14);
+            this.label56.Location = new System.Drawing.Point(212, 30);
             this.label56.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(0, 25);
             this.label56.TabIndex = 40;
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(705, 80);
-            this.label50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(50, 25);
-            this.label50.TabIndex = 37;
-            this.label50.Text = "ماہانہ فیس";
-            // 
-            // monthlyFeeTextbox
-            // 
-            this.monthlyFeeTextbox.Location = new System.Drawing.Point(560, 77);
-            this.monthlyFeeTextbox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.monthlyFeeTextbox.Name = "monthlyFeeTextbox";
-            this.monthlyFeeTextbox.Size = new System.Drawing.Size(131, 33);
-            this.monthlyFeeTextbox.TabIndex = 35;
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(717, 80);
-            this.label54.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(0, 25);
-            this.label54.TabIndex = 36;
             // 
             // groupBox12
             // 
@@ -3009,16 +3233,16 @@
             this.groupBox12.Controls.Add(this.monthAug);
             this.groupBox12.Controls.Add(this.monthMay);
             this.groupBox12.Controls.Add(this.monthJan);
-            this.groupBox12.Location = new System.Drawing.Point(10, 250);
+            this.groupBox12.Location = new System.Drawing.Point(10, 231);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(151, 401);
+            this.groupBox12.Size = new System.Drawing.Size(151, 417);
             this.groupBox12.TabIndex = 63;
             this.groupBox12.TabStop = false;
             // 
             // monthDec
             // 
             this.monthDec.AutoSize = true;
-            this.monthDec.Location = new System.Drawing.Point(60, 369);
+            this.monthDec.Location = new System.Drawing.Point(60, 367);
             this.monthDec.Name = "monthDec";
             this.monthDec.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.monthDec.Size = new System.Drawing.Size(53, 29);
@@ -3147,34 +3371,54 @@
             this.monthJan.Text = "جنوری";
             this.monthJan.UseVisualStyleBackColor = true;
             // 
-            // groupBox11
+            // studentInfoFeeTabPanel
             // 
-            this.groupBox11.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox11.Controls.Add(this.classSchoolTextboxFeeEntryTab);
-            this.groupBox11.Controls.Add(this.classQuraniaTextboxFeeEntryTab);
-            this.groupBox11.Controls.Add(this.imageStudentFeeEntryTab);
-            this.groupBox11.Controls.Add(this.label47);
-            this.groupBox11.Controls.Add(this.label48);
-            this.groupBox11.Controls.Add(this.sirNameTextboxFeeEntryTab);
-            this.groupBox11.Controls.Add(this.label49);
-            this.groupBox11.Controls.Add(this.nameStudentTextboxFeeEntryTab);
-            this.groupBox11.Controls.Add(this.fnameTextboxFeeEntryTab);
-            this.groupBox11.Controls.Add(this.label51);
-            this.groupBox11.Controls.Add(this.label52);
-            this.groupBox11.Controls.Add(this.label53);
-            this.groupBox11.Location = new System.Drawing.Point(9, 90);
-            this.groupBox11.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.groupBox11.Size = new System.Drawing.Size(951, 154);
-            this.groupBox11.TabIndex = 62;
-            this.groupBox11.TabStop = false;
+            this.studentInfoFeeTabPanel.BackColor = System.Drawing.Color.Transparent;
+            this.studentInfoFeeTabPanel.Controls.Add(this.label69);
+            this.studentInfoFeeTabPanel.Controls.Add(this.dakhlaNumberTBFeeEntryTab);
+            this.studentInfoFeeTabPanel.Controls.Add(this.classSchoolTextboxFeeEntryTab);
+            this.studentInfoFeeTabPanel.Controls.Add(this.classQuraniaTextboxFeeEntryTab);
+            this.studentInfoFeeTabPanel.Controls.Add(this.imageStudentFeeEntryTab);
+            this.studentInfoFeeTabPanel.Controls.Add(this.label47);
+            this.studentInfoFeeTabPanel.Controls.Add(this.label48);
+            this.studentInfoFeeTabPanel.Controls.Add(this.sirNameTextboxFeeEntryTab);
+            this.studentInfoFeeTabPanel.Controls.Add(this.label49);
+            this.studentInfoFeeTabPanel.Controls.Add(this.nameStudentTextboxFeeEntryTab);
+            this.studentInfoFeeTabPanel.Controls.Add(this.fnameTextboxFeeEntryTab);
+            this.studentInfoFeeTabPanel.Controls.Add(this.label51);
+            this.studentInfoFeeTabPanel.Controls.Add(this.label52);
+            this.studentInfoFeeTabPanel.Controls.Add(this.label53);
+            this.studentInfoFeeTabPanel.Location = new System.Drawing.Point(9, 71);
+            this.studentInfoFeeTabPanel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.studentInfoFeeTabPanel.Name = "studentInfoFeeTabPanel";
+            this.studentInfoFeeTabPanel.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.studentInfoFeeTabPanel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.studentInfoFeeTabPanel.Size = new System.Drawing.Size(951, 154);
+            this.studentInfoFeeTabPanel.TabIndex = 62;
+            this.studentInfoFeeTabPanel.TabStop = false;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(870, 92);
+            this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(49, 25);
+            this.label69.TabIndex = 67;
+            this.label69.Text = "داخلہ نمبر";
+            // 
+            // dakhlaNumberTBFeeEntryTab
+            // 
+            this.dakhlaNumberTBFeeEntryTab.Location = new System.Drawing.Point(718, 89);
+            this.dakhlaNumberTBFeeEntryTab.Name = "dakhlaNumberTBFeeEntryTab";
+            this.dakhlaNumberTBFeeEntryTab.ReadOnly = true;
+            this.dakhlaNumberTBFeeEntryTab.Size = new System.Drawing.Size(129, 33);
+            this.dakhlaNumberTBFeeEntryTab.TabIndex = 66;
             // 
             // classSchoolTextboxFeeEntryTab
             // 
             this.classSchoolTextboxFeeEntryTab.BackColor = System.Drawing.Color.White;
-            this.classSchoolTextboxFeeEntryTab.Location = new System.Drawing.Point(394, 29);
+            this.classSchoolTextboxFeeEntryTab.Location = new System.Drawing.Point(182, 45);
             this.classSchoolTextboxFeeEntryTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.classSchoolTextboxFeeEntryTab.Name = "classSchoolTextboxFeeEntryTab";
             this.classSchoolTextboxFeeEntryTab.ReadOnly = true;
@@ -3183,7 +3427,7 @@
             // 
             // classQuraniaTextboxFeeEntryTab
             // 
-            this.classQuraniaTextboxFeeEntryTab.Location = new System.Drawing.Point(394, 73);
+            this.classQuraniaTextboxFeeEntryTab.Location = new System.Drawing.Point(182, 89);
             this.classQuraniaTextboxFeeEntryTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.classQuraniaTextboxFeeEntryTab.Name = "classQuraniaTextboxFeeEntryTab";
             this.classQuraniaTextboxFeeEntryTab.ReadOnly = true;
@@ -3204,7 +3448,7 @@
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(544, 76);
+            this.label47.Location = new System.Drawing.Point(332, 92);
             this.label47.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(56, 25);
@@ -3214,7 +3458,7 @@
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(864, 115);
+            this.label48.Location = new System.Drawing.Point(597, 92);
             this.label48.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(61, 25);
@@ -3223,7 +3467,7 @@
             // 
             // sirNameTextboxFeeEntryTab
             // 
-            this.sirNameTextboxFeeEntryTab.Location = new System.Drawing.Point(719, 112);
+            this.sirNameTextboxFeeEntryTab.Location = new System.Drawing.Point(452, 89);
             this.sirNameTextboxFeeEntryTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.sirNameTextboxFeeEntryTab.Name = "sirNameTextboxFeeEntryTab";
             this.sirNameTextboxFeeEntryTab.ReadOnly = true;
@@ -3233,7 +3477,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(876, 115);
+            this.label49.Location = new System.Drawing.Point(609, 92);
             this.label49.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(0, 25);
@@ -3242,7 +3486,7 @@
             // nameStudentTextboxFeeEntryTab
             // 
             this.nameStudentTextboxFeeEntryTab.BackColor = System.Drawing.Color.White;
-            this.nameStudentTextboxFeeEntryTab.Location = new System.Drawing.Point(719, 26);
+            this.nameStudentTextboxFeeEntryTab.Location = new System.Drawing.Point(719, 45);
             this.nameStudentTextboxFeeEntryTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.nameStudentTextboxFeeEntryTab.Name = "nameStudentTextboxFeeEntryTab";
             this.nameStudentTextboxFeeEntryTab.ReadOnly = true;
@@ -3251,7 +3495,7 @@
             // 
             // fnameTextboxFeeEntryTab
             // 
-            this.fnameTextboxFeeEntryTab.Location = new System.Drawing.Point(719, 70);
+            this.fnameTextboxFeeEntryTab.Location = new System.Drawing.Point(452, 47);
             this.fnameTextboxFeeEntryTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.fnameTextboxFeeEntryTab.Name = "fnameTextboxFeeEntryTab";
             this.fnameTextboxFeeEntryTab.ReadOnly = true;
@@ -3261,7 +3505,7 @@
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(888, 32);
+            this.label51.Location = new System.Drawing.Point(888, 50);
             this.label51.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(25, 25);
@@ -3271,7 +3515,7 @@
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(873, 73);
+            this.label52.Location = new System.Drawing.Point(606, 50);
             this.label52.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(47, 25);
@@ -3281,7 +3525,7 @@
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(544, 31);
+            this.label53.Location = new System.Drawing.Point(332, 47);
             this.label53.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(56, 25);
@@ -3290,7 +3534,7 @@
             // 
             // dakhlaNumberTextboxFeeEntryTab
             // 
-            this.dakhlaNumberTextboxFeeEntryTab.Location = new System.Drawing.Point(777, 38);
+            this.dakhlaNumberTextboxFeeEntryTab.Location = new System.Drawing.Point(768, 41);
             this.dakhlaNumberTextboxFeeEntryTab.Name = "dakhlaNumberTextboxFeeEntryTab";
             this.dakhlaNumberTextboxFeeEntryTab.Size = new System.Drawing.Size(100, 33);
             this.dakhlaNumberTextboxFeeEntryTab.TabIndex = 60;
@@ -3298,105 +3542,160 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(916, 41);
+            this.label46.Location = new System.Drawing.Point(907, 44);
             this.label46.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(49, 25);
             this.label46.TabIndex = 61;
             this.label46.Text = "داخلہ نمبر";
             // 
+            // receiptBookInfoTab
+            // 
+            this.receiptBookInfoTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.receiptBookInfoTab.Controls.Add(this.updateBookRecord);
+            this.receiptBookInfoTab.Controls.Add(this.searchBookRecords);
+            this.receiptBookInfoTab.Controls.Add(this.bookRecordsGridView);
+            this.receiptBookInfoTab.Controls.Add(this.bookNumberInfoCombobox);
+            this.receiptBookInfoTab.Controls.Add(this.label71);
+            this.receiptBookInfoTab.Location = new System.Drawing.Point(4, 34);
+            this.receiptBookInfoTab.Name = "receiptBookInfoTab";
+            this.receiptBookInfoTab.Padding = new System.Windows.Forms.Padding(3);
+            this.receiptBookInfoTab.Size = new System.Drawing.Size(1007, 696);
+            this.receiptBookInfoTab.TabIndex = 8;
+            this.receiptBookInfoTab.Text = "رسید بک معلومات";
+            // 
+            // updateBookRecord
+            // 
+            this.updateBookRecord.BackColor = System.Drawing.Color.Navy;
+            this.updateBookRecord.Font = new System.Drawing.Font("Alvi Nastaleeq", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateBookRecord.ForeColor = System.Drawing.Color.White;
+            this.updateBookRecord.Location = new System.Drawing.Point(70, 596);
+            this.updateBookRecord.Name = "updateBookRecord";
+            this.updateBookRecord.Size = new System.Drawing.Size(98, 43);
+            this.updateBookRecord.TabIndex = 76;
+            this.updateBookRecord.Text = "تبدیل کریں";
+            this.updateBookRecord.UseVisualStyleBackColor = false;
+            this.updateBookRecord.Click += new System.EventHandler(this.updateBookRecord_Click);
+            // 
+            // searchBookRecords
+            // 
+            this.searchBookRecords.BackColor = System.Drawing.Color.Navy;
+            this.searchBookRecords.Font = new System.Drawing.Font("Alvi Nastaleeq", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchBookRecords.ForeColor = System.Drawing.Color.White;
+            this.searchBookRecords.Location = new System.Drawing.Point(565, 46);
+            this.searchBookRecords.Name = "searchBookRecords";
+            this.searchBookRecords.Size = new System.Drawing.Size(98, 43);
+            this.searchBookRecords.TabIndex = 75;
+            this.searchBookRecords.Text = "تلاش کریں";
+            this.searchBookRecords.UseVisualStyleBackColor = false;
+            this.searchBookRecords.Click += new System.EventHandler(this.searchBookRecords_Click);
+            // 
+            // bookRecordsGridView
+            // 
+            this.bookRecordsGridView.AllowUserToAddRows = false;
+            this.bookRecordsGridView.AllowUserToDeleteRows = false;
+            this.bookRecordsGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.bookRecordsGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.bookRecordsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.bookRecordsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.slipNumberRB,
+            this.transactionTypeRB,
+            this.transactionDateRB,
+            this.transactionAmountRB,
+            this.transactionYearRB,
+            this.dakhlaNumberRB,
+            this.feeTypeRB,
+            this.feeMonth});
+            this.bookRecordsGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.bookRecordsGridView.Location = new System.Drawing.Point(35, 149);
+            this.bookRecordsGridView.MultiSelect = false;
+            this.bookRecordsGridView.Name = "bookRecordsGridView";
+            this.bookRecordsGridView.ReadOnly = true;
+            this.bookRecordsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.bookRecordsGridView.Size = new System.Drawing.Size(936, 433);
+            this.bookRecordsGridView.TabIndex = 74;
+            // 
+            // slipNumberRB
+            // 
+            this.slipNumberRB.HeaderText = "رسید نمبر";
+            this.slipNumberRB.Name = "slipNumberRB";
+            this.slipNumberRB.ReadOnly = true;
+            this.slipNumberRB.Width = 50;
+            // 
+            // transactionTypeRB
+            // 
+            this.transactionTypeRB.HeaderText = "قسم";
+            this.transactionTypeRB.Name = "transactionTypeRB";
+            this.transactionTypeRB.ReadOnly = true;
+            this.transactionTypeRB.Width = 90;
+            // 
+            // transactionDateRB
+            // 
+            this.transactionDateRB.HeaderText = "تاریخ";
+            this.transactionDateRB.Name = "transactionDateRB";
+            this.transactionDateRB.ReadOnly = true;
+            this.transactionDateRB.Width = 90;
+            // 
+            // transactionAmountRB
+            // 
+            this.transactionAmountRB.HeaderText = "رقم";
+            this.transactionAmountRB.Name = "transactionAmountRB";
+            this.transactionAmountRB.ReadOnly = true;
+            this.transactionAmountRB.Width = 70;
+            // 
+            // transactionYearRB
+            // 
+            this.transactionYearRB.HeaderText = "سال";
+            this.transactionYearRB.Name = "transactionYearRB";
+            this.transactionYearRB.ReadOnly = true;
+            this.transactionYearRB.Width = 50;
+            // 
+            // dakhlaNumberRB
+            // 
+            this.dakhlaNumberRB.HeaderText = "داخلہ نمبر";
+            this.dakhlaNumberRB.Name = "dakhlaNumberRB";
+            this.dakhlaNumberRB.ReadOnly = true;
+            this.dakhlaNumberRB.Width = 70;
+            // 
+            // feeTypeRB
+            // 
+            this.feeTypeRB.HeaderText = "فیس کی قسم";
+            this.feeTypeRB.Name = "feeTypeRB";
+            this.feeTypeRB.ReadOnly = true;
+            this.feeTypeRB.Width = 230;
+            // 
+            // feeMonth
+            // 
+            this.feeMonth.HeaderText = "مہینہ";
+            this.feeMonth.Name = "feeMonth";
+            this.feeMonth.ReadOnly = true;
+            this.feeMonth.Width = 250;
+            // 
+            // bookNumberInfoCombobox
+            // 
+            this.bookNumberInfoCombobox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.bookNumberInfoCombobox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.bookNumberInfoCombobox.FormattingEnabled = true;
+            this.bookNumberInfoCombobox.Location = new System.Drawing.Point(724, 51);
+            this.bookNumberInfoCombobox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.bookNumberInfoCombobox.Name = "bookNumberInfoCombobox";
+            this.bookNumberInfoCombobox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.bookNumberInfoCombobox.Size = new System.Drawing.Size(129, 33);
+            this.bookNumberInfoCombobox.TabIndex = 64;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(901, 54);
+            this.label71.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(43, 25);
+            this.label71.TabIndex = 63;
+            this.label71.Text = "بک نمبر";
+            // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(217, 5);
-            this.label61.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(28, 25);
-            this.label61.TabIndex = 41;
-            this.label61.Text = "دیگر";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(55, 2);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(131, 33);
-            this.textBox1.TabIndex = 39;
-            // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(212, 5);
-            this.label62.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(0, 25);
-            this.label62.TabIndex = 40;
-            // 
-            // otherFeePanel
-            // 
-            this.otherFeePanel.Controls.Add(this.textBox1);
-            this.otherFeePanel.Controls.Add(this.label61);
-            this.otherFeePanel.Controls.Add(this.label62);
-            this.otherFeePanel.Location = new System.Drawing.Point(504, 168);
-            this.otherFeePanel.Name = "otherFeePanel";
-            this.otherFeePanel.Size = new System.Drawing.Size(268, 38);
-            this.otherFeePanel.TabIndex = 42;
-            this.otherFeePanel.Visible = false;
-            // 
-            // otherFeeChkbox
-            // 
-            this.otherFeeChkbox.AutoSize = true;
-            this.otherFeeChkbox.Location = new System.Drawing.Point(601, 32);
-            this.otherFeeChkbox.Name = "otherFeeChkbox";
-            this.otherFeeChkbox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.otherFeeChkbox.Size = new System.Drawing.Size(47, 29);
-            this.otherFeeChkbox.TabIndex = 43;
-            this.otherFeeChkbox.Text = "دیگر";
-            this.otherFeeChkbox.UseVisualStyleBackColor = true;
-            this.otherFeeChkbox.CheckedChanged += new System.EventHandler(this.otherFeeChkbox_CheckedChanged);
-            // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(720, 126);
-            this.label67.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(30, 25);
-            this.label67.TabIndex = 46;
-            this.label67.Text = "سال";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(559, 123);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(131, 33);
-            this.textBox2.TabIndex = 44;
-            // 
-            // label68
-            // 
-            this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(716, 126);
-            this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(0, 25);
-            this.label68.TabIndex = 45;
-            // 
-            // submitFee
-            // 
-            this.submitFee.BackColor = System.Drawing.Color.Navy;
-            this.submitFee.Font = new System.Drawing.Font("Alvi Nastaleeq", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.submitFee.ForeColor = System.Drawing.Color.White;
-            this.submitFee.Location = new System.Drawing.Point(582, 337);
-            this.submitFee.Name = "submitFee";
-            this.submitFee.Size = new System.Drawing.Size(94, 43);
-            this.submitFee.TabIndex = 66;
-            this.submitFee.Text = "جمع کریں";
-            this.submitFee.UseVisualStyleBackColor = false;
             // 
             // LandingPage
             // 
@@ -3462,16 +3761,24 @@
             this.feeEntryTab.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.feeInfoGridView)).EndInit();
+            this.monthlyFeePanel.ResumeLayout(false);
+            this.monthlyFeePanel.PerformLayout();
+            this.yearPanel.ResumeLayout(false);
+            this.yearPanel.PerformLayout();
+            this.otherFeePanel.ResumeLayout(false);
+            this.otherFeePanel.PerformLayout();
             this.newStudentPanel.ResumeLayout(false);
             this.newStudentPanel.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
+            this.studentInfoFeeTabPanel.ResumeLayout(false);
+            this.studentInfoFeeTabPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageStudentFeeEntryTab)).EndInit();
+            this.receiptBookInfoTab.ResumeLayout(false);
+            this.receiptBookInfoTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bookRecordsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.otherFeePanel.ResumeLayout(false);
-            this.otherFeePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3683,7 +3990,7 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.TabPage feeEntryTab;
-        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.GroupBox studentInfoFeeTabPanel;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.TextBox sirNameTextboxFeeEntryTab;
@@ -3723,15 +4030,42 @@
         private System.Windows.Forms.Button searchBtnFeeEntryTab;
         private System.Windows.Forms.TextBox classSchoolTextboxFeeEntryTab;
         private System.Windows.Forms.TextBox classQuraniaTextboxFeeEntryTab;
-        private System.Windows.Forms.CheckBox newStudentCheckbox;
-        private System.Windows.Forms.CheckBox otherFeeChkbox;
         private System.Windows.Forms.Panel otherFeePanel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox otherFeeAmountTextbox;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Label label67;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox amountYearTextbox;
         private System.Windows.Forms.Label label68;
-        private System.Windows.Forms.Button submitFee;
+        private System.Windows.Forms.Button submitFeeButton;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.TextBox dakhlaNumberTBFeeEntryTab;
+        private System.Windows.Forms.Label receiptNumberText;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.CheckBox otherFeeCheckBox;
+        private System.Windows.Forms.CheckBox newStudentCheckBox;
+        private System.Windows.Forms.Panel monthlyFeePanel;
+        private System.Windows.Forms.Panel yearPanel;
+        private System.Windows.Forms.DataGridView feeInfoGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn slipNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn month;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn year;
+        private System.Windows.Forms.DataGridViewTextBoxColumn feeType;
+        private System.Windows.Forms.TabPage receiptBookInfoTab;
+        private System.Windows.Forms.Button searchBookRecords;
+        private System.Windows.Forms.DataGridView bookRecordsGridView;
+        private System.Windows.Forms.ComboBox bookNumberInfoCombobox;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.DataGridViewTextBoxColumn slipNumberRB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionTypeRB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionDateRB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionAmountRB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transactionYearRB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dakhlaNumberRB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn feeTypeRB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn feeMonth;
+        private System.Windows.Forms.Button updateBookRecord;
     }
 }

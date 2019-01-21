@@ -37,3 +37,8 @@ D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\
 D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\obj\Debug\MajmaUloomUlIslamia.exe
 D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\obj\Debug\MajmaUloomUlIslamia.pdb
 D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\obj\Debug\MajmaUloomUlIslamia.csprojResolveAssemblyReference.cache
+D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\obj\Debug\MajmaUloomUlIslamia.StudentMonthlyFeePage.resources
+D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\bin\Debug\log4net.dll
+D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\bin\Debug\log4net.xml
+D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\obj\Debug\MajmaUloomUlIslamia.editReceiptRecord.resources
+D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\bin\Debug\log4net.config

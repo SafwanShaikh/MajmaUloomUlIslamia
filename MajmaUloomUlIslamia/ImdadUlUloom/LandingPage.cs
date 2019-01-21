@@ -13,6 +13,8 @@ namespace MajmaUloomUlIslamia
 {
     public partial class LandingPage : Form
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private Student[] activeStudentList;
         private Student[] inActiveStudentList;
         //private Dictionary<int, Student> sameRegistrationNumberStudentsList = new Dictionary<int, Student>();
@@ -20,6 +22,9 @@ namespace MajmaUloomUlIslamia
 
         public LandingPage()
         {
+            logger.Info("**********************************************************************************");
+            logger.Info("Application Started");
+
             Cursor.Current = Cursors.WaitCursor;
             InitializeComponent();
             activeStudentList = DataManipulation.getAllStudents(true).ToArray();
@@ -34,8 +39,10 @@ namespace MajmaUloomUlIslamia
 
         private void mainTab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(mainTab.SelectedTab == mainTab.TabPages["addNewStudentTab"])
+            logger.Info("Main Tab Index Changed");
+            if (mainTab.SelectedTab == mainTab.TabPages["addNewStudentTab"])
             {
+                logger.Info("Add New Student Tab Selected");
                 Cursor.Current = Cursors.WaitCursor;
 
                 fillZilaComboBox();
@@ -49,6 +56,7 @@ namespace MajmaUloomUlIslamia
                 formNumberLabel.Text = StudentDakhlaAndFormNumber.FormNumber.ToString();
                 registrationNumberLabel.Text = StudentDakhlaAndFormNumber.DakhlaNumber.ToString();
                 Cursor.Current = Cursors.Default;
+                logger.Info("Add New Tab Selection ended");
             }
             else if(mainTab.SelectedTab == mainTab.TabPages["addPreviousStudentTab"])
             {
@@ -61,6 +69,7 @@ namespace MajmaUloomUlIslamia
             }
             else if(mainTab.SelectedTab == mainTab.TabPages["ReceiptBook"])
             {
+                logger.Info("Receipt Book Tab Selected");
                 Cursor.Current = Cursors.WaitCursor;
                 bookLists.DataSource = DataManipulation.getAllReceiptBooks();
                 List<string> activeBookInfo = DataManipulation.getActiveReceiptBook();
@@ -69,16 +78,32 @@ namespace MajmaUloomUlIslamia
                 lastSlipInfoTextbox.Text = activeBookInfo[2];
                 lastSlipUsedInfoTextbox.Text = activeBookInfo[3];
                 Cursor.Current = Cursors.Default;
+                logger.Info("Receipt Book Tab Selection ended");
+            }
+            else if(mainTab.SelectedTab == mainTab.TabPages["FeeEntryTab"])
+            {
+                logger.Info("Fee Entry Tab Selected");
+                receiptNumberText.Text = DataManipulation.getReceiptNumber().ToString();
+                logger.Info("Receipt Book Tab Selection ended");
+            }
+            else if(mainTab.SelectedTab == mainTab.TabPages["receiptBookInfoTab"])
+            {
+                logger.Info("Receipt Book Info Tab Selected");
+                bookNumberInfoCombobox.DataSource = DataManipulation.getAllReceiptBooks();
+                logger.Info("Receipt Book Tab Selection ended");
             }
         }
 
         private void LandingPage_FormClosing(object sender, FormClosingEventArgs e)
         {
+            logger.Info("Application Closing process started");
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 DialogResult result = MessageBox.Show("Do you really want to exit?", "Exit", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
+                    logger.Info("Application closed");
+                    logger.Info("**********************************************************************************");
                     Environment.Exit(0);
                 }
                 else
@@ -96,7 +121,8 @@ namespace MajmaUloomUlIslamia
         
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(nameStudentTextbox.Text) || String.IsNullOrEmpty(fatherNameStudentTextbox.Text) ||
+            logger.Info("New Student Save Process started");
+            if (String.IsNullOrEmpty(nameStudentTextbox.Text) || String.IsNullOrEmpty(fatherNameStudentTextbox.Text) ||
                 String.IsNullOrEmpty(takmeelDateCombobox.Text) ||
                 String.IsNullOrEmpty(takmeelMonthCombobox.Text) || String.IsNullOrEmpty(takmeelYearCombobox.Text))
             {
@@ -122,7 +148,10 @@ namespace MajmaUloomUlIslamia
                 {
                     Cursor.Current = Cursors.WaitCursor;
                     Student newStudent = getStudentFromForm();
+                    
                     DataManipulation.addStudent(newStudent, false);
+
+                    logger.Info("Dakhla Report Generated");
 
                     DakhlaCardReport rpt = new DakhlaCardReport();
                     rpt.Student = newStudent;
@@ -145,6 +174,7 @@ namespace MajmaUloomUlIslamia
 
         private Student getStudentFromForm()
         {
+            logger.Info("Get Student From Form started");
             Student newStudent = new Student();
 
             try
@@ -218,6 +248,7 @@ namespace MajmaUloomUlIslamia
 
         private void uploadButton_Click(object sender, EventArgs e)
         {
+            logger.Info("Image upload for new student clicked");
             OpenFileDialog fileOpen = new OpenFileDialog();
 
             fileOpen.Title = "Open Image file";
@@ -233,6 +264,7 @@ namespace MajmaUloomUlIslamia
         
         private void fillZilaComboBox()
         {
+            logger.Info("Fill Zilla Combobox started");
             List<string> zilaAll = new List<string>();
             for (int i = 0; i < activeStudentList.Length; i++)
             {
@@ -247,10 +279,12 @@ namespace MajmaUloomUlIslamia
             {
                 zilaCombobox.Items.Add(item);
             }
+            logger.Info("Fill Zilla Combobox ended");
         }
 
         private void fillTehseelComboBox()
         {
+            logger.Info("Fill Tehseel Combobox started");
             List<string> TehseelAll = new List<string>();
             for (int i = 0; i < activeStudentList.Length; i++)
             {
@@ -265,10 +299,12 @@ namespace MajmaUloomUlIslamia
             {
                 tehseelCombobox.Items.Add(item);
             }
+            logger.Info("Fill Tehseel Combobox ended");
         }
 
         private void fillDakKhanaComboBox()
         {
+            logger.Info("Fill Dak-khana Combobox started");
             List<string> dakKhanaAll = new List<string>();
             for (int i = 0; i < activeStudentList.Length; i++)
             {
@@ -283,10 +319,12 @@ namespace MajmaUloomUlIslamia
             {
                 dakKhanaCombobox.Items.Add(item);
             }
+            logger.Info("Fill Dak-Khana Combobox ended");
         }
 
         private void fillVillageComboBox()
         {
+            logger.Info("Fill Village Combobox started");
             List<string> villageAll = new List<string>();
             for (int i = 0; i < activeStudentList.Length; i++)
             {
@@ -301,10 +339,12 @@ namespace MajmaUloomUlIslamia
             {
                 villageCombobox.Items.Add(item);
             }
+            logger.Info("Fill Village Combobox ended");
         }
 
         private void fillSectorComboBox()
         {
+            logger.Info("Fill Sector Combobox started");
             List<string> sectorAll = new List<string>();
             for (int i = 0; i < activeStudentList.Length; i++)
             {
@@ -319,10 +359,12 @@ namespace MajmaUloomUlIslamia
             {
                 sectorNumberCombobox.Items.Add(item);
             }
+            logger.Info("Fill Sector Combobox started");
         }
 
         private void fillAreaComboBox()
         {
+            logger.Info("Fill Area Combobox started");
             List<string> areaAll = new List<string>();
             for (int i = 0; i < activeStudentList.Length; i++)
             {
@@ -337,12 +379,14 @@ namespace MajmaUloomUlIslamia
             {
                 areaCombobox.Items.Add(item);
             }
+            logger.Info("Fill Area Combobox ended");
         }
 
         //      Search Student Tab
 
         private void searchStudentButton_Click(object sender, EventArgs e)
         {
+            logger.Info("Search student general information started");
             editStudentButton.Enabled = true;
             deleteStudentButton.Enabled = true;
             printCardButton.Enabled = true;
@@ -458,10 +502,13 @@ namespace MajmaUloomUlIslamia
             {
                 MessageBox.Show("درست ڈیٹا درج کیجئے۔");
             }
+            logger.Info("Search student general information ended");
+
         }
 
         private void fillGridView(List<int> dakhlaNumber, Boolean active)
         {
+            logger.Info("Fill Grid View started");
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -530,11 +577,14 @@ namespace MajmaUloomUlIslamia
                 searchTextbox.Clear();
                 Cursor.Current = Cursors.Default;
             }
+            logger.Info("Fill Grid View ended");
 
         }
 
         private String getClassOfStudent()
         {
+            logger.Info("Get class of Student started");
+
             String studentClass = "";
 
             if (class1Radio.Checked == true)
@@ -609,12 +659,15 @@ namespace MajmaUloomUlIslamia
             {
                 studentClass = "حفظ";
             }
+            logger.Info("Get class of Student ended");
 
             return studentClass;
         }
 
         private List<int> getDakhlaNumbersOfName(string name, String classOfStudent)
         {
+            logger.Info("getDakhlaNumbersOfName started");
+
             List<int> dakhlaNumbers = new List<int>();
             if (!previousStudent.Checked)
             {
@@ -636,11 +689,15 @@ namespace MajmaUloomUlIslamia
                     }
                 }
             }
+            logger.Info("getDakhlaNumbersOfName ended");
+
             return dakhlaNumbers;
         }
 
         private List<int> getDakhlaNumbersOfStudentFatherName(string fatherName)
         {
+            logger.Info("getDakhlaNumbersOfStudentFatherName started");
+
             List<int> dakhlaNumbers = new List<int>();
             if (!previousStudent.Checked)
             {
@@ -662,12 +719,15 @@ namespace MajmaUloomUlIslamia
                     }
                 }
             }
+            logger.Info("getDakhlaNumbersOfStudentFatherName ended");
 
             return dakhlaNumbers;
         }
 
         private List<int> getDakhlaNumbersOfYear(string year)
         {
+            logger.Info("getDakhlaNumbersOfYear started");
+
             List<int> dakhlaNumbers = new List<int>();
             if (!previousStudent.Checked)
             {
@@ -691,11 +751,15 @@ namespace MajmaUloomUlIslamia
                     }
                 }
             }
+            logger.Info("getDakhlaNumbersOfYear ended");
+
             return dakhlaNumbers;
         }
 
         private List<int> getDakhlaNumbersOfImdadi(Boolean imdadi, string classOfStudent)
         {
+            logger.Info("getDakhlaNumbersOfImdadi started");
+
             List<int> regNumbers = new List<int>();
             if (imdadi)
             {
@@ -745,11 +809,15 @@ namespace MajmaUloomUlIslamia
                 }
 
             }
+            logger.Info("getDakhlaNumbersOfImdadi ended");
+
             return regNumbers;
         }
 
         private List<int> getDakhlaNumbersOfAllStudents()
         {
+            logger.Info("getDakhlaNumbersOfAllStudents started");
+
             List<int> dakhlaNumbers = new List<int>();
             if (!previousStudent.Checked)
             {
@@ -765,12 +833,15 @@ namespace MajmaUloomUlIslamia
                     dakhlaNumbers.Add(inActiveStudentList[i].StudentDakhlaNumber.DakhlaNumber);
                 }
             }
+            logger.Info("getDakhlaNumbersOfAllStudents ended");
 
             return dakhlaNumbers;
         }
 
         private List<int> getDakhlaNumbersOfStudentsByClass(string classOfStudent)
         {
+            logger.Info("getDakhlaNumbersOfStudentsByClass ended");
+
             List<int> dakhlaNumbers = new List<int>();
             if (!previousStudent.Checked)
             {
@@ -794,12 +865,15 @@ namespace MajmaUloomUlIslamia
                     }
                 }
             }
+            logger.Info("getDakhlaNumbersOfStudentsByClass ended");
 
             return dakhlaNumbers;
         }
 
         private void editStudentButton_Click(object sender, EventArgs e)
         {
+            logger.Info("Edit Student started");
+
             if (studentGridView.SelectedRows.Count == 1)
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -828,6 +902,8 @@ namespace MajmaUloomUlIslamia
 
         private void deleteStudentButton_Click(object sender, EventArgs e)
         {
+            logger.Info("Delete Student Button clicked");
+
             List<string> dakhlaNumbers = new List<string>();
             foreach (DataGridViewRow row in studentGridView.SelectedRows)
             {
@@ -844,6 +920,7 @@ namespace MajmaUloomUlIslamia
                 newPage.mainTab.SelectedIndex = 2;
                 //searchStudentButton.PerformClick();
             }
+            logger.Info("Delete Student ended");
 
         }
 
@@ -1426,7 +1503,7 @@ namespace MajmaUloomUlIslamia
         private void bookLists_SelectedIndexChanged(object sender, EventArgs e)
         {
             int bookNumber = Convert.ToInt32(bookLists.SelectedValue);
-            List<string> bookInfo = DataManipulation.getSpecificBookInfo(bookNumber);
+            List<string> bookInfo = DataManipulation.getSpecificBookInfoUsingBookNumber(bookNumber);
             specificBookFirstSlip.Text = bookInfo[0];
             specificBookLastSlip.Text = bookInfo[1];
         }
@@ -1459,16 +1536,43 @@ namespace MajmaUloomUlIslamia
         
         private void searchBtnFeeEntryTab_Click(object sender, EventArgs e)
         {
-            int dakhlaNumber = Convert.ToInt32(dakhlaNumberTextboxFeeEntryTab.Text);
-            foreach(Student student in activeStudentList)
+            feeInfoGridView.Rows.Clear();
+            int dakhlaNumber = Int32.MaxValue;
+            if(!String.IsNullOrEmpty(dakhlaNumberTextboxFeeEntryTab.Text))
+            {
+                dakhlaNumber = Convert.ToInt32(dakhlaNumberTextboxFeeEntryTab.Text);
+            }
+            
+            submitFeeButton.Enabled = true;
+            resetInfoBox();
+            foreach (Student student in activeStudentList)
             {
                 if(student.StudentDakhlaNumber.DakhlaNumber.Equals(dakhlaNumber))
                 {
+                    dakhlaNumberTBFeeEntryTab.Text = student.StudentDakhlaNumber.DakhlaNumber.ToString();
                     nameStudentTextboxFeeEntryTab.Text = student.StudentBasicInfo.NameStudent;
                     fnameTextboxFeeEntryTab.Text = student.StudentBasicInfo.FatherNameStudent;
                     sirNameTextboxFeeEntryTab.Text = student.StudentBasicInfo.SurName;
                     classSchoolTextboxFeeEntryTab.Text = student.StudentDarjaRecord.SchoolDarja;
                     classQuraniaTextboxFeeEntryTab.Text = student.StudentDarjaRecord.Quraniadarja;
+                    List<List<string>> feeRecords = DataManipulation.getFeeRecord(dakhlaNumber);
+                    if (feeRecords.Count > 0)
+                    {
+                        
+                        feeInfoGridView.Rows.Add(feeRecords.Count);
+                        int row = 0;
+                        foreach(List<string> feeRecord in feeRecords)
+                        {
+                            int column = 0;
+                            foreach (string record in feeRecord)
+                            {
+                                feeInfoGridView.Rows[row].Cells[column].Value = record;
+                                column++;
+                            }
+                            row++;
+                        }
+                        
+                    }
                     try
                     {
                         if (student.StudentBasicInfo.ImageStudent != null)
@@ -1480,47 +1584,327 @@ namespace MajmaUloomUlIslamia
                         {
                             MessageBox.Show("تصویر موجود نہیں ہے۔");
                         }
-
                     }
                     catch(Exception ex)
                     {
                         MessageBox.Show(ex.Message.ToString());
                     }
+
+                    if(student.StudentImdadi.Imdadi)
+                    {
+                        submitFeeButton.Enabled = false;
+                    }
                     break;
+
                 }
+                
             }
             
         }
 
-        private void newStudentCheckbox_CheckedChanged(object sender, EventArgs e)
+        private void resetInfoBox()
         {
-            if(newStudentCheckbox.Checked)
+            dakhlaNumberTBFeeEntryTab.Text = "";
+            nameStudentTextboxFeeEntryTab.Text = "";
+            fnameTextboxFeeEntryTab.Text = "";
+            sirNameTextboxFeeEntryTab.Text = "";
+            classSchoolTextboxFeeEntryTab.Text = "";
+            classQuraniaTextboxFeeEntryTab.Text = "";
+            imageStudentFeeEntryTab.Image = null;
+        }
+
+        private void newStudentCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(otherFeeCheckBox.Checked != true)
             {
-                newStudentPanel.Visible = true;
+                if (newStudentCheckBox.Checked == true)
+                {
+                    studentInfoFeeTabPanel.Visible = true;
+                    searchBtnFeeEntryTab.Visible = true;
+                    newStudentPanel.Visible = true;
+                }
+                else
+                {
+
+                    newStudentPanel.Visible = false;
+                }
             }
             else
             {
-                newStudentPanel.Visible = false;
+                MessageBox.Show("ایک آپشن کا انتخاب کیجئے۔");
+                newStudentCheckBox.Checked = false;
             }
         }
 
-        private void otherFeeChkbox_CheckedChanged(object sender, EventArgs e)
+        private void otherFeeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (otherFeeChkbox.Checked)
+            if(newStudentCheckBox.Checked != true)
             {
-                otherFeePanel.Visible = true;
+                if (otherFeeCheckBox.Checked == true)
+                {
+                    otherFeePanel.Visible = true;
+                    studentInfoFeeTabPanel.Visible = false;
+                    searchBtnFeeEntryTab.Visible = false;
+                    monthlyFeePanel.Visible = false;
+                }
+                else
+                {
+                    studentInfoFeeTabPanel.Visible = true;
+                    searchBtnFeeEntryTab.Visible = true;
+                    otherFeePanel.Visible = false;
+                    monthlyFeePanel.Visible = true;
+                }
             }
             else
             {
-                otherFeePanel.Visible = false;
+                MessageBox.Show("ایک آپشن کا انتخاب کیجئے۔");
+                otherFeeCheckBox.Checked = false;
+            }
+            
+        }
+
+        private void submitFeeButton_Click(object sender, EventArgs e)
+        {
+            if(newStudentCheckBox.Checked == false && otherFeeCheckBox.Checked == false)
+            {
+                List<string> months = getCheckedMonths();
+                double monthlyFee = Double.Parse(monthlyFeeTextbox.Text);
+                string studentFeeYear = amountYearTextbox.Text;
+                string slipNumber = receiptNumberText.Text;
+                string studentFeeType = "MONTHLY FEE";
+                string studentFeeDate = DateTime.Now.ToString("dd-MM-yyyy");
+                int dakhlaNumber = Int32.Parse(dakhlaNumberTBFeeEntryTab.Text);
+                try
+                {
+                    double transactionAmount = submitMonthlyFees(months, monthlyFee, studentFeeYear, slipNumber, studentFeeType, studentFeeDate, dakhlaNumber);
+                    if(!transactionAmount.Equals(0.0))
+                    {
+                        DataManipulation.doTransaction(studentFeeYear, transactionAmount, slipNumber, "STUDENT FEE", studentFeeDate);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                LandingPage newPage = new LandingPage();
+                this.Hide();
+                newPage.Show();
+                newPage.mainTab.SelectedIndex = 6;
+
+            }
+
+            if(otherFeeCheckBox.Checked == true)
+            {
+                string transactionYear = amountYearTextbox.Text;
+                double transactionAmount = double.Parse(otherFeeAmountTextbox.Text);
+                string slipNumber = receiptNumberText.Text;
+                string transactionType = "OTHER";
+                string transactionDate = DateTime.Now.ToString("dd-MM-yyyy");
+                try
+                {
+                    DataManipulation.doTransaction(transactionYear, transactionAmount, slipNumber, transactionType, transactionDate);
+                    LandingPage newPage = new LandingPage();
+                    this.Hide();
+                    newPage.Show();
+                    newPage.mainTab.SelectedIndex = 6;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+            if(newStudentCheckBox.Checked == true)
+            {
+                List<string> months = getCheckedMonths();
+                double monthlyFee = Double.Parse(monthlyFeeTextbox.Text);
+                double dakhlaFee = Double.Parse(adminssionFeeTextBox.Text);
+                double courseFee = Double.Parse(courseFeeTextbox.Text);
+                string studentFeeYear = amountYearTextbox.Text;
+                string slipNumber = receiptNumberText.Text;
+                string studentDakhlaFeeType = "DAKHLA FEE";
+                string studentCourseFeeType = "COURSE FEE";
+                string studentMonthlyFeeType = "MONTHLY FEE";
+                string studentFeeDate = DateTime.Now.ToString("dd-MM-yyyy");
+                double transactionAmount = 0.0;
+                int dakhlaNumber = Int32.Parse(dakhlaNumberTBFeeEntryTab.Text);
+                try
+                {
+                    Boolean status = DataManipulation.submitMonthlyfee(months[0], dakhlaFee, studentFeeYear, slipNumber, studentDakhlaFeeType, studentFeeDate, dakhlaNumber);
+                    transactionAmount += dakhlaFee;
+                    if(status)
+                    {
+                        MessageBox.Show("داخلہ فیس جمع ہوگئی ہے۔");
+                        status = DataManipulation.submitMonthlyfee(months[0], courseFee, studentFeeYear, slipNumber, studentCourseFeeType, studentFeeDate, dakhlaNumber);
+                        transactionAmount += courseFee;
+                        if(status)
+                        {
+                            MessageBox.Show("کورس فیس جمع ہوگئی ہے۔");
+                            transactionAmount += submitMonthlyFees(months, monthlyFee, studentFeeYear, slipNumber, studentMonthlyFeeType, studentFeeDate, dakhlaNumber);
+                            DataManipulation.doTransaction(studentFeeYear, transactionAmount, slipNumber, "STUDENT FEE", studentFeeDate);
+                        }
+
+                    }
+                    LandingPage newPage = new LandingPage();
+                    this.Hide();
+                    newPage.Show();
+                    newPage.mainTab.SelectedIndex = 6;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+        }
+
+        private double submitMonthlyFees(List<String> months, double monthlyFee, string studentFeeYear, string slipNumber, string studentFeeType, string studentFeeDate, int dakhlaNumber)
+        {
+            //Boolean flag = false;
+            double transactionAmount = 0.0;
+            foreach (string month in months)
+            {
+                Boolean status = DataManipulation.submitMonthlyfee(month, monthlyFee, studentFeeYear, slipNumber, studentFeeType, studentFeeDate, dakhlaNumber);
+                if (status)
+                {
+                    transactionAmount += monthlyFee;
+                    //flag = true;
+                    MessageBox.Show("کی فیس جمع ہو گئی ہے۔ " + month);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            //if (flag)
+            //{
+            //    return transactionAmount;
+            //    //DataManipulation.doTransaction(studentFeeYear, transactionAmount, slipNumber, "STUDENT FEE", studentFeeDate);
+            //    //DataManipulation.updateReceipt();
+            //}
+
+            return transactionAmount;
+        }
+
+        private List<string> getCheckedMonths()
+        {
+            List<string> months = new List<string>();
+            
+            if(monthJan.Checked == true)
+            {
+                months.Add("JANUARY");
+            }
+
+            if (monthFab.Checked == true)
+            {
+                months.Add("FEBRUARY");
+            }
+
+            if (monthMarch.Checked == true)
+            {
+                months.Add("MARCH");
+            }
+
+            if (monthApr.Checked == true)
+            {
+                months.Add("APRIL");
+            }
+
+            if (monthMay.Checked == true)
+            {
+                months.Add("MAY");
+            }
+
+            if (monthJune.Checked == true)
+            {
+                months.Add("JUNE");
+            }
+
+            if (monthJuly.Checked == true)
+            {
+                months.Add("JULY");
+            }
+
+            if (monthAug.Checked == true)
+            {
+                months.Add("AUGUST");
+            }
+
+            if (monthSept.Checked == true)
+            {
+                months.Add("SEPTEMBER");
+            }
+
+            if (monthOct.Checked == true)
+            {
+                months.Add("OCTOBER");
+            }
+
+            if (monthNov.Checked == true)
+            {
+                months.Add("NOVEMBER");
+            }
+
+            if (monthDec.Checked == true)
+            {
+                months.Add("DECEMBER");
+            }
+
+            return months;
+        }
+
+        private void searchBookRecords_Click(object sender, EventArgs e)
+        {
+            bookRecordsGridView.Rows.Clear();
+            int dakhlaNumber = Convert.ToInt32(bookNumberInfoCombobox.Text);
+            List<List<string>> bookRecords = DataManipulation.getBookRecords(dakhlaNumber);
+            if (bookRecords.Count > 0)
+            {
+                bookRecordsGridView.Rows.Add(bookRecords.Count);
+                int row = 0;
+                foreach (List<string> bookRecord in bookRecords)
+                {
+                    int column = 0;
+                    foreach (string record in bookRecord)
+                    {
+                        bookRecordsGridView.Rows[row].Cells[column].Value = record;
+                        column++;
+                    }
+                    row++;
+                }
+
             }
         }
 
+        private void updateBookRecord_Click(object sender, EventArgs e)
+        {
+            if (bookRecordsGridView.SelectedRows.Count == 1)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string slipNumber = bookRecordsGridView.SelectedRows[0].Cells[0].Value.ToString();
+                string type = bookRecordsGridView.SelectedRows[0].Cells[1].Value.ToString();
+                string transactionDate = bookRecordsGridView.SelectedRows[0].Cells[2].Value.ToString();
+                //if(!type.Equals("OTHER"))
+                //{
+                //    int dakhlaNumber = Convert.ToInt32(bookRecordsGridView.SelectedRows[0].Cells[5].Value.ToString());
 
+                //}
 
+                editReceiptRecord editReceipt = new editReceiptRecord();
+                editReceipt.ReceiptNumber = slipNumber;
+                editReceipt.Type = type;
+                editReceipt.TransactionDate = transactionDate;
+                editReceipt.Show();
+                
+                Cursor.Current = Cursors.Default;
 
-
-
+            }
+            else
+            {
+                MessageBox.Show("ایک ریکارڈ سلیکٹ کیجئے۔");
+            }
+        }
 
 
         //private void cnicStudentTextbox_TextChanged(object sender, EventArgs e)
