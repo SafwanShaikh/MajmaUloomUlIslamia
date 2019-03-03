@@ -42,3 +42,4 @@ D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\
 D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\bin\Debug\log4net.xml
 D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\obj\Debug\MajmaUloomUlIslamia.editReceiptRecord.resources
 D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\bin\Debug\log4net.config
+D:\Uni\Xtra\Program\DotNet\MajmaUloomUlIslamia\MajmaUloomUlIslamia\ImdadUlUloom\obj\Debug\MajmaUloomUlIslamia.ShowReceiptRecord.resources

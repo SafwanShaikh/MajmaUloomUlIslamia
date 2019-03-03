@@ -3563,6 +3563,7 @@
             this.receiptBookInfoTab.Size = new System.Drawing.Size(1007, 696);
             this.receiptBookInfoTab.TabIndex = 8;
             this.receiptBookInfoTab.Text = "رسید بک معلومات";
+            this.receiptBookInfoTab.Click += new System.EventHandler(this.receiptBookInfoTab_Click);
             // 
             // updateBookRecord
             // 

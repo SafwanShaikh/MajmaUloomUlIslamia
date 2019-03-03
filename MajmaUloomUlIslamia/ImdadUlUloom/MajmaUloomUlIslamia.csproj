@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -62,6 +62,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -119,11 +122,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataManipulation.cs" />
-    <Compile Include="editReceiptRecord.cs">
+    <Compile Include="EditReceiptRecord.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="editReceiptRecord.Designer.cs">
-      <DependentUpon>editReceiptRecord.cs</DependentUpon>
+    <Compile Include="EditReceiptRecord.Designer.cs">
+      <DependentUpon>EditReceiptRecord.cs</DependentUpon>
     </Compile>
     <Compile Include="editStudentPage.cs">
       <SubType>Form</SubType>
@@ -150,6 +153,12 @@
     </Compile>
     <Compile Include="DakhlaFormReport.Designer.cs">
       <DependentUpon>DakhlaFormReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowReceiptRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowReceiptRecord.Designer.cs">
+      <DependentUpon>ShowReceiptRecord.cs</DependentUpon>
     </Compile>
     <Compile Include="Student.cs" />
     <Compile Include="StudentBasicInfo.cs" />
@@ -186,8 +195,8 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DakhlaFormReportCard.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="editReceiptRecord.resx">
-      <DependentUpon>editReceiptRecord.cs</DependentUpon>
+    <EmbeddedResource Include="EditReceiptRecord.resx">
+      <DependentUpon>EditReceiptRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="editStudentPage.resx">
       <DependentUpon>editStudentPage.cs</DependentUpon>
@@ -211,11 +220,15 @@
     <EmbeddedResource Include="DakhlaFormReport.resx">
       <DependentUpon>DakhlaFormReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ShowReceiptRecord.resx">
+      <DependentUpon>ShowReceiptRecord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StudentMonthlyFeePage.resx">
       <DependentUpon>StudentMonthlyFeePage.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -253,8 +266,8 @@
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>False</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

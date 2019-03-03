@@ -83,6 +83,7 @@ namespace MajmaUloomUlIslamia
             else if(mainTab.SelectedTab == mainTab.TabPages["FeeEntryTab"])
             {
                 logger.Info("Fee Entry Tab Selected");
+                DataManipulation.checkReceiptBook();
                 receiptNumberText.Text = DataManipulation.getReceiptNumber().ToString();
                 logger.Info("Receipt Book Tab Selection ended");
             }
@@ -153,13 +154,13 @@ namespace MajmaUloomUlIslamia
 
                     logger.Info("Dakhla Report Generated");
 
-                    DakhlaCardReport rpt = new DakhlaCardReport();
-                    rpt.Student = newStudent;
+                    //DakhlaCardReport rpt = new DakhlaCardReport();
+                    //rpt.Student = newStudent;
 
                     LandingPage newPage = new LandingPage();
                     this.Hide();
                     newPage.Show();
-                    rpt.Show();
+                    //rpt.Show();
                     Cursor.Current = Cursors.Default;
                     
                 }
@@ -1884,19 +1885,13 @@ namespace MajmaUloomUlIslamia
                 Cursor.Current = Cursors.WaitCursor;
                 string slipNumber = bookRecordsGridView.SelectedRows[0].Cells[0].Value.ToString();
                 string type = bookRecordsGridView.SelectedRows[0].Cells[1].Value.ToString();
-                string transactionDate = bookRecordsGridView.SelectedRows[0].Cells[2].Value.ToString();
-                //if(!type.Equals("OTHER"))
-                //{
-                //    int dakhlaNumber = Convert.ToInt32(bookRecordsGridView.SelectedRows[0].Cells[5].Value.ToString());
-
-                //}
-
-                editReceiptRecord editReceipt = new editReceiptRecord();
-                editReceipt.ReceiptNumber = slipNumber;
-                editReceipt.Type = type;
-                editReceipt.TransactionDate = transactionDate;
-                editReceipt.Show();
+                //string transactionDate = bookRecordsGridView.SelectedRows[0].Cells[2].Value.ToString();
                 
+                ShowReceiptRecord showReceiptRecord = new ShowReceiptRecord();
+                showReceiptRecord.ReceiptNumber = slipNumber;
+                showReceiptRecord.Type = type;
+                showReceiptRecord.Show();
+
                 Cursor.Current = Cursors.Default;
 
             }
@@ -1906,6 +1901,11 @@ namespace MajmaUloomUlIslamia
             }
         }
 
+        private void receiptBookInfoTab_Click(object sender, EventArgs e)
+        {
+            searchBookRecords.PerformClick();
+        }
+        
 
         //private void cnicStudentTextbox_TextChanged(object sender, EventArgs e)
         //{

@@ -1,0 +1,7 @@
+<connectionStrings>
+    <add name="connectionString" connectionString="Data Source=server; Initial Catalog=MajmaUloomUlIslamia; MultipleActiveResultSets=true; User Id=sa; Password=12345" />
+  </connectionStrings>
+  <appSettings>
+    <add key="BackUpDatabasePath" value="D:\MajmaDBbackupSafwan\MajmaDataBaseBackup" />
+    <add key="ClientSettingsProvider.ServiceUri" value="" />
+  </appSettings>
