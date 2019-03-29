@@ -73,10 +73,13 @@ namespace MajmaUloomUlIslamia
                 Cursor.Current = Cursors.WaitCursor;
                 bookLists.DataSource = DataManipulation.getAllReceiptBooks();
                 List<string> activeBookInfo = DataManipulation.getActiveReceiptBook();
-                activeBook.Text = activeBookInfo[0];
-                firstSlipInfoTextbox.Text = activeBookInfo[1];
-                lastSlipInfoTextbox.Text = activeBookInfo[2];
-                lastSlipUsedInfoTextbox.Text = activeBookInfo[3];
+                if (activeBookInfo != null && activeBookInfo.Any())
+                {
+                    activeBook.Text = activeBookInfo[0];
+                    firstSlipInfoTextbox.Text = activeBookInfo[1];
+                    lastSlipInfoTextbox.Text = activeBookInfo[2];
+                    lastSlipUsedInfoTextbox.Text = activeBookInfo[3];
+                }
                 Cursor.Current = Cursors.Default;
                 logger.Info("Receipt Book Tab Selection ended");
             }

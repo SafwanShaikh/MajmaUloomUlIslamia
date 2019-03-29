@@ -64,39 +64,6 @@ namespace MajmaUloomUlIslamia
             
         }
 
-        private static int getDarjaRecordId()
-        {
-            int darjaRecordId = Int32.MaxValue;
-            try
-            {
-                using (sqlConnection = new SqlConnection(connectionString))
-                {
-                    string queryGetDarjaRecordId = "select max(darjaRecordId) from StudentDarjaRecord";
-                    try
-                    {
-                        sqlConnection.Open();
-                        SqlCommand getDarjaRecordIdCommand = new SqlCommand(queryGetDarjaRecordId, sqlConnection);
-                        SqlDataReader reader2 = getDarjaRecordIdCommand.ExecuteReader();
-                        while (reader2.Read())
-                        {
-                            darjaRecordId = Convert.ToInt32(reader2[0]) + 1;
-                        }
-                        reader2.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-            return darjaRecordId;
-        }
-
         private static int getBookNumberId()
         {
             int bookNumberId = Int32.MaxValue;
@@ -144,7 +111,7 @@ namespace MajmaUloomUlIslamia
                         SqlCommand getBookLastSequenceCommand = new SqlCommand(getBookLastSequence, sqlConnection);
                         SqlDataReader reader2 = getBookLastSequenceCommand.ExecuteReader();
                         while (reader2.Read())
-                        {
+                        {   
                             bookNumber = Convert.ToInt32(reader2[0]) + 1;
                         }
                         reader2.Close();
@@ -229,52 +196,50 @@ namespace MajmaUloomUlIslamia
             return studentFeeId;
         }
 
-        private static int getGuardianInfoId()
-        {
-            int guardianInfoId = Int32.MaxValue;
-            try
-            {
-                using (sqlConnection = new SqlConnection(connectionString))
-                {
-                    string queryGetGuardianId = "select max(guardianInfoId) from StudentGuardianInfo";
-                    try
-                    {
-                        sqlConnection.Open();
-                        SqlCommand getGuardianIdCommand = new SqlCommand(queryGetGuardianId, sqlConnection);
-                        SqlDataReader reader2 = getGuardianIdCommand.ExecuteReader();
-                        while (reader2.Read())
-                        {
-                            guardianInfoId = Convert.ToInt32(reader2[0]) + 1;
-                        }
-                        reader2.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+        //private static int getGuardianInfoId()
+        //{
+        //    int guardianInfoId = Int32.MaxValue;
+        //    try
+        //    {
+        //        using (sqlConnection = new SqlConnection(connectionString))
+        //        {
+        //            string queryGetGuardianId = "select max(guardianInfoId) from StudentGuardianInfo";
+        //            try
+        //            {
+        //                sqlConnection.Open();
+        //                SqlCommand getGuardianIdCommand = new SqlCommand(queryGetGuardianId, sqlConnection);
+        //                SqlDataReader reader2 = getGuardianIdCommand.ExecuteReader();
+        //                while (reader2.Read())
+        //                {
+        //                    guardianInfoId = Convert.ToInt32(reader2[0]) + 1;
+        //                }
+        //                reader2.Close();
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show(ex.ToString());
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
 
-            return guardianInfoId;
-        }
+        //    return guardianInfoId;
+        //}
 
         
         public static void addStudent(Student newStudent, Boolean existing)
         {
-            int darjaRecordId = getDarjaRecordId();
-            int guardianId = getGuardianInfoId();
-
+           
             using(sqlConnection = new SqlConnection(connectionString))
             {
                 string querydakhlaNumber = "insert into StudentDakhlaNumber(dakhlaNumber, formNumber, activeIndex) values(@dakhlaNumber, @formNumber, @activeIndex)";
                 string queryBasicInfo = "insert into StudentBasicInfo(dakhlaNumber, nameStudent, fatherNameStudent, surNameStudent, dobStudent, imageStudent) values(@dakhlaNumber, @nameStudent, @fatherNameStudent, @surNameStudent, @dobStudent, @imageStudent)";
                 string queryFormDate = "insert into StudentFormDate(dakhlaNumber, takmeelDakhlaDate, ikhrajDate) values(@dakhlaNumber, @takmeelDakhlaDate, @ikhrajDate)";
-                string queryStudentDarjaRecord = "insert into StudentDarjaRecord(darjaRecordId, dakhlaNumber, schoolDarja, quraniaDarja, yearSchool, activeInd, yearQurania) values(@darjaRecordId, @dakhlaNumber, @schoolDarja, @quraniaDarja, @yearSchool, @activeInd, @yearQurania)";
-                string queryGuardianInfo = "insert into StudentGuardianInfo(guardianInfoId, dakhlaNumber, nameGuardian, contactGuardian, relationGuardian, cnicGuardian, isPrimary) values(@guardianInfoId, @dakhlaNumber, @nameGuardian, @contactGuardian, @relationGuardian, @cnicGuardian, @isPrimary)";
+                string queryStudentDarjaRecord = "insert into StudentDarjaRecord(darjaRecordId, dakhlaNumber, schoolDarja, quraniaDarja, yearSchool, activeInd, yearQurania) values(NEXT VALUE FOR STUDENT_DARJA_RECORD_SEQ, @dakhlaNumber, @schoolDarja, @quraniaDarja, @yearSchool, @activeInd, @yearQurania)";
+                string queryGuardianInfo = "insert into StudentGuardianInfo(guardianInfoId, dakhlaNumber, nameGuardian, contactGuardian, relationGuardian, cnicGuardian, isPrimary) values(NEXT VALUE FOR STUDENT_GUARDIAN_INFO_SEQ, @dakhlaNumber, @nameGuardian, @contactGuardian, @relationGuardian, @cnicGuardian, @isPrimary)";
                 string queryPermanentAddress = "insert into StudentPermanentAddress(dakhlaNumber, zila, tehseel, dakKhana, village) values (@dakhlaNumber, @zila, @tehseel, @dakKhana, @village)";
                 string queryKarachiAddress = "insert into StudentKarachiAddress(dakhlaNumber, houseNumber, blockNumber, sectorNumber, area) values(@dakhlaNumber, @houseNumber, @blockNumber, @sectorNumber, @area)";
                 string queryQawaif = "insert into StudentQawaif(dakhlaNumber, qurania, lastQuraniaIdara, lastAsriTaleemIdara, asriTaleem) values(@dakhlaNumber, @qurania, @lastQuraniaIdara, @lastAsriTaleemIdara, @asriTaleem)";
@@ -315,7 +280,7 @@ namespace MajmaUloomUlIslamia
                     insertBasicInfoCommand.ExecuteNonQuery();
 
                     SqlCommand insertDarjaRecord = new SqlCommand(queryStudentDarjaRecord, sqlConnection, sqlTransaction);
-                    insertDarjaRecord.Parameters.AddWithValue("@darjaRecordId", darjaRecordId);
+                    //insertDarjaRecord.Parameters.AddWithValue("@darjaRecordId", darjaRecordId);
                     insertDarjaRecord.Parameters.AddWithValue("@dakhlaNumber", newStudent.StudentDakhlaNumber.DakhlaNumber);
                     insertDarjaRecord.Parameters.AddWithValue("@schoolDarja", newStudent.StudentDarjaRecord.SchoolDarja);
                     insertDarjaRecord.Parameters.AddWithValue("@quraniaDarja", newStudent.StudentDarjaRecord.Quraniadarja);
@@ -327,7 +292,7 @@ namespace MajmaUloomUlIslamia
                     StudentGuardianInfo studentGuardianInfo = newStudent.StudentGuardianInfo[0];
 
                     SqlCommand insertGuardianInfoCommand = new SqlCommand(queryGuardianInfo, sqlConnection, sqlTransaction);
-                    insertGuardianInfoCommand.Parameters.AddWithValue("@guardianInfoId", guardianId);
+                    //insertGuardianInfoCommand.Parameters.AddWithValue("@guardianInfoId", guardianId);
                     insertGuardianInfoCommand.Parameters.AddWithValue("@dakhlaNumber", studentGuardianInfo.DakhlaNumber);
                     insertGuardianInfoCommand.Parameters.AddWithValue("@nameGuardian", studentGuardianInfo.NameGuardian);
                     insertGuardianInfoCommand.Parameters.AddWithValue("@contactGuardian", studentGuardianInfo.ContactGuardian);
@@ -651,15 +616,15 @@ namespace MajmaUloomUlIslamia
         {
             try
             {
-                int guardianId = getGuardianInfoId();
+                //int guardianId = getGuardianInfoId();
                 using (sqlConnection = new SqlConnection(connectionString))
                 {
-                    string queryInsertGuardianInfo = "insert into StudentGuardianInfo(guardianInfoId, dakhlaNumber, cnicGuardian, nameGuardian, relationGuardian, contactGuardian, isPrimary) values(@guardianInfoId, @dakhlaNumber, @cnicGuardian, @nameGuardian, @relationGuardian, @contactGuardian, @isPrimary)";
+                    string queryInsertGuardianInfo = "insert into StudentGuardianInfo(guardianInfoId, dakhlaNumber, cnicGuardian, nameGuardian, relationGuardian, contactGuardian, isPrimary) values(NEXT VALUE FOR STUDENT_GUARDIAN_INFO_SEQ, @dakhlaNumber, @cnicGuardian, @nameGuardian, @relationGuardian, @contactGuardian, @isPrimary)";
                     try
                     {
                         sqlConnection.Open();
                         SqlCommand getGuardianInfoCommand = new SqlCommand(queryInsertGuardianInfo, sqlConnection);
-                        getGuardianInfoCommand.Parameters.AddWithValue("@guardianInfoId", guardianId);
+                        //getGuardianInfoCommand.Parameters.AddWithValue("@guardianInfoId", guardianId);
                         getGuardianInfoCommand.Parameters.AddWithValue("@dakhlaNumber", guardianInfo.DakhlaNumber);
                         getGuardianInfoCommand.Parameters.AddWithValue("@cnicGuardian", guardianInfo.CnicGuardian);
                         getGuardianInfoCommand.Parameters.AddWithValue("@nameGuardian", guardianInfo.NameGuardian);
@@ -749,16 +714,16 @@ namespace MajmaUloomUlIslamia
         {
             try
             {
-                int darjaId = getDarjaRecordId();
+                //int darjaId = getDarjaRecordId();
                 using (sqlConnection = new SqlConnection(connectionString))
                 {
-                    string queryStudentDarjaRecord = "insert into StudentDarjaRecord(darjaRecordId, dakhlaNumber, schoolDarja, quraniaDarja, yearSchool, activeInd, yearQurania) values(@darjaRecordId, @dakhlaNumber, @schoolDarja, @quraniaDarja, @yearSchool, @activeInd, @yearQurania)";
+                    string queryStudentDarjaRecord = "insert into StudentDarjaRecord(darjaRecordId, dakhlaNumber, schoolDarja, quraniaDarja, yearSchool, activeInd, yearQurania) values(NEXT VALUE FOR STUDENT_DARJA_RECORD_SEQ, @dakhlaNumber, @schoolDarja, @quraniaDarja, @yearSchool, @activeInd, @yearQurania)";
 
                     try
                     {
                         sqlConnection.Open();
                         SqlCommand insertDarjaRecord = new SqlCommand(queryStudentDarjaRecord, sqlConnection);
-                        insertDarjaRecord.Parameters.AddWithValue("@darjaRecordId", darjaId);
+                        //insertDarjaRecord.Parameters.AddWithValue("@darjaRecordId", darjaId);
                         insertDarjaRecord.Parameters.AddWithValue("@dakhlaNumber", newDarjaRecord.DakhlaNumber);
                         insertDarjaRecord.Parameters.AddWithValue("@schoolDarja", newDarjaRecord.SchoolDarja);
                         insertDarjaRecord.Parameters.AddWithValue("@quraniaDarja", newDarjaRecord.Quraniadarja);
